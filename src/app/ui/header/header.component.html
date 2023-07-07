@@ -1,0 +1,14 @@
+<div class="main-nav">
+  <ul>
+    <li class="home">
+      <a routerLink="/">Home</a>
+    </li>
+    <li class="collections">
+      <a routerLink="/collections">Collections</a>
+    </li>
+    <li [ngClass]="loggedIn? 'profile' : 'login-register'">
+      <a *ngIf="loggedIn" routerLink="/profile">Profile</a>
+      <a *ngIf="!loggedIn" routerLink="/login">Login</a>
+    </li>
+  </ul>
+</div>
