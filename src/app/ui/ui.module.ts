@@ -4,7 +4,6 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AppRoutingModule } from "../app-routing.module";
-import {AppModule} from "../app.module";
 
 
 @NgModule({

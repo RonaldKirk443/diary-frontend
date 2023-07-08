@@ -1,0 +1,33 @@
+
+<form class="main-form" #registerForm="ngForm">
+
+  <div class="email-div">
+    <label>Email: </label>
+    <input name="email" required ngModel>
+  </div>
+  <div class="pass-div">
+    <label>Password: </label>
+    <input name="pass" ngModel>
+  </div>
+  <div class="username-div">
+    <label>Username: </label>
+    <input name="username" ngModel>
+  </div>
+  <div class="birthday-div">
+    <label>Birthday: </label>
+    <input name="birthday" ngModel="2010-3-25">
+  </div>
+  <div>
+    <button (click)="register(registerForm)">Register</button>
+  </div>
+  <div></div>
+  <div class="login">
+    Already a user?
+    <a routerLink="/login">Log in</a>
+  </div>
+  <div>
+    {{ registerForm.value | json}}
+  </div>
+</form>
+
+

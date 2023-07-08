@@ -4,6 +4,9 @@ import { HomeComponent } from './home/home.component';
 import { CollectionsComponent } from './collections/collections.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterComponent } from './register/register.component';
+import { AppRoutingModule } from "../app-routing.module";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -12,10 +15,13 @@ import { ProfileComponent } from './profile/profile.component';
     HomeComponent,
     CollectionsComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    RegisterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AppRoutingModule,
+    FormsModule
   ]
 })
 export class PagesModule { }
