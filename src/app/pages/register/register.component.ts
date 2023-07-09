@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm} from '@angular/forms'
+import { RegisterService} from "./register.service";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-register',
@@ -7,9 +9,17 @@ import { NgForm} from '@angular/forms'
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  register(registerForm : NgForm) : void {
-    // this.http.post<any>('https://reqres.in/api/posts', { title: 'Angular POST Request Example' }).subscribe(data => {
-    //   this.postId = data.id;
-    // })
+  user: User = {
+    username: '',
+    email: '',
+    birthday: new Date("2010-3-25")
+  };
+
+  constructor(private registerService: RegisterService) {
   }
+  RegisterUser(registerForm : NgForm) : void {
+    console.log(registerForm);
+    this.registerService.addUser(this.user).subscribe();
+  }
+
 }

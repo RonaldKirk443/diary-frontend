@@ -1,9 +1,9 @@
 
-<form class="main-form" #registerForm="ngForm">
+<form class="main-form" #registerForm="ngForm" (ngSubmit)="RegisterUser(registerForm)">
 
   <div class="email-div">
     <label>Email: </label>
-    <input name="email" required ngModel>
+    <input name="email" required [(ngModel)]="user.email">
   </div>
   <div class="pass-div">
     <label>Password: </label>
@@ -11,14 +11,14 @@
   </div>
   <div class="username-div">
     <label>Username: </label>
-    <input name="username" ngModel>
+    <input name="username" [(ngModel)]="user.username">
   </div>
   <div class="birthday-div">
     <label>Birthday: </label>
-    <input name="birthday" ngModel="2010-3-25">
+    <input name="birthday" value="2010-3-25" [(ngModel)]="user.birthday">
   </div>
   <div>
-    <button (click)="register(registerForm)">Register</button>
+    <button type="submit">Submit</button>
   </div>
   <div></div>
   <div class="login">
