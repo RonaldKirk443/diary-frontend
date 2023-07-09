@@ -63,7 +63,8 @@
               "browserTarget": "diary-frontend:build:production"
             },
             "development": {
-              "browserTarget": "diary-frontend:build:development"
+              "browserTarget": "diary-frontend:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
