@@ -18,10 +18,10 @@ import {FormsModule} from "@angular/forms";
     ProfileComponent,
     RegisterComponent
   ],
-  imports: [
-    CommonModule,
-    AppRoutingModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        AppRoutingModule,
+        FormsModule
+    ]
 })
 export class PagesModule { }

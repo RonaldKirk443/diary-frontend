@@ -10,6 +10,7 @@ import {User} from "../../models/user";
 })
 export class RegisterComponent {
   user: User = {
+    id: 0,
     username: '',
     email: '',
     birthday: new Date("2010-3-25")
@@ -17,7 +18,7 @@ export class RegisterComponent {
 
   constructor(private registerService: RegisterService) {
   }
-  RegisterUser(registerForm : NgForm) : void {
+  registerUser(registerForm : NgForm) : void {
     console.log(registerForm);
     this.registerService.addUser(this.user).subscribe();
   }
