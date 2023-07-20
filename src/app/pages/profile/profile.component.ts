@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProfileService} from "./profile.service";
 import {User} from "../../models/user";
+import {AuthService} from "../../auth/services/auth.service";
 
 @Component({
   selector: 'app-profile',
@@ -9,19 +10,20 @@ import {User} from "../../models/user";
 })
 export class ProfileComponent implements OnInit{
   user: User = {
-    username:'',
-    email:'',
-    birthday: new Date()
+    id: 0
   }
-  constructor(private profileService: ProfileService) {
+  constructor(private profileService: ProfileService, private authService : AuthService) {
   }
 
   ngOnInit() {
-    let user = this.profileService.getUser(3).subscribe(res => {
-      console.log(res);
-      this.user = res;
+    this.authService.getUser()?.subscribe(result => {
+      this.user = result
     });
-    console.log(user);
+  }
+
+  logOut() {
+    console.log("LOG OUT");
+    this.authService.logoutUser();
   }
 
 

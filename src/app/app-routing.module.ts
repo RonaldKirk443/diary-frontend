@@ -6,6 +6,8 @@ import { LoginComponent } from "./pages/login/login.component";
 import { CollectionsComponent } from "./pages/collections/collections.component";
 import {ProfileComponent} from "./pages/profile/profile.component";
 import {RegisterComponent} from "./pages/register/register.component";
+import {authGuard} from "./auth/guards/auth.guard";
+import {userGuard} from "./auth/guards/user.guard";
 
 const routes: Routes = [
   {
@@ -15,18 +17,22 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'collections',
     component: CollectionsComponent,
+    canActivate: [userGuard]
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [userGuard]
   },
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate: [authGuard]
   },
 ];
 

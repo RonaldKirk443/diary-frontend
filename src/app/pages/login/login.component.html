@@ -1,14 +1,21 @@
-<form class="main-form">
+<form class="main-form" #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
   <div class="email-div">
     <label>Email: </label>
-    <input name="email">
+    <input name="email" placeholder="id=" required [(ngModel)]="login.email" >
   </div>
   <div class="pass-div">
     <label>Password: </label>
-    <input name="pass">
+    <input name="pass" required [(ngModel)]="login.pass">
   </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+  <div></div>
   <div class="register">
     Don't have an account?
     <a routerLink="/register">Sign up</a>
+  </div>
+  <div>
+    {{ loginForm.value | json}}
   </div>
 </form>
