@@ -1,8 +1,5 @@
-enum HiddenStatus {
-  Default,
-  Private,
-  Public
-}
+import {HiddenStatus} from "../enums/hiddenStatus";
+
 
 export class User {
   id: number = 0;
