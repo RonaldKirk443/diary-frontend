@@ -17,10 +17,9 @@ export class LoginComponent {
   constructor(private authService : AuthService) {
   }
 
-  loginUser(loginForm : NgForm) : void {
-    console.log(loginForm);
+  loginUser() : void {
     if (this.login.email.startsWith("id=")) {
-      var i = Number(this.login.email.slice(3));
+      let i = Number(this.login.email.slice(3));
       this.authService.loginUser(this.login, i);
       return;
     }

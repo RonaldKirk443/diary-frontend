@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {CollectionsService} from "./collections.service";
 import {Collection} from "../../models/collection";
 import {HiddenStatus} from "../../enums/hiddenStatus";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-collections',
@@ -41,7 +42,7 @@ export class CollectionsComponent {
     };
   }
 
-  saveEdits(col: Collection) {
+  saveEdits() {
     this.collectionsService.updateCollection(this.editingCollection).subscribe();
     this.collections[this.edit] = this.editingCollection;
     this.edit = -1;
