@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {CollectionsService} from "./collections.service";
 import {Collection} from "../../models/collection";
 import {HiddenStatus} from "../../enums/hiddenStatus";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-collections',
@@ -14,33 +15,44 @@ export class CollectionsComponent {
   editingCollection: Collection = {
     id : 0
   }
-  edit: number = 0;
+  edit: number = -1;
 
   constructor(private collectionsService: CollectionsService) {
   }
 
   ngOnInit() {
+    this.getCollections();
+  }
+
+  getCollections() {
     this.collectionsService.getCollections().subscribe(result => {
       this.collections = result
-      for(let col of this.collections) {
-        console.log(col.hiddenStatus);
-      }
     });
   }
 
-  enterEditMode(col: Collection) {
+  enterEditMode(colNum: number, col: Collection) {
+    this.edit = colNum;
+    console.log(this.edit)
     this.editingCollection = {
-      id : col.id,
+      id: col.id,
       title: col.title,
       description: col.description,
+      backgroundImgLink: col.backgroundImgLink,
       hiddenStatus: col.hiddenStatus
-    }
-    this.edit = col.id;
+    };
   }
 
-  saveEdits(col: Collection) {
+  saveEdits() {
     this.collectionsService.updateCollection(this.editingCollection).subscribe();
-    this.edit = 0;
+    this.collections[this.edit] = this.editingCollection;
+    this.edit = -1;
+    this.editingCollection = {
+      id : 0
+    }
+  }
+
+  cancelEdits() {
+    this.edit = -1;
     this.editingCollection = {
       id : 0
     }
@@ -50,19 +62,13 @@ export class CollectionsComponent {
     console.log("PRE")
     console.log(this.editingCollection.hiddenStatus);
 
-    let num : number = 0;
-    if (this.editingCollection.hiddenStatus != null) {
-      num = this.editingCollection.hiddenStatus;
-    }
-
-    console.log(num)
-    if(num == HiddenStatus.Private) {
+    if(this.editingCollection.hiddenStatus == HiddenStatus.Private || this.editingCollection.hiddenStatus?.toString() == HiddenStatus[HiddenStatus.Private]) {
       this.editingCollection.hiddenStatus = HiddenStatus.Public;
-    } else if(num == HiddenStatus.Public) {
+    } else if(this.editingCollection.hiddenStatus == HiddenStatus.Public || this.editingCollection.hiddenStatus?.toString() == HiddenStatus[HiddenStatus.Public]) {
       this.editingCollection.hiddenStatus = HiddenStatus.Private;
     } else {
       console.log("THIS IS BAD")
-      console.log(this.editingCollection.hiddenStatus)
+      console.log(HiddenStatus[HiddenStatus.Public])
     }
 
     console.log("POST")
