@@ -1,21 +1,24 @@
-<div class="idBody row w-100 m-0 mt-5 h-100">
+<div class="idBody row w-100 m-0 mt-5 h-100 container-fluid">
   <div class="mx-auto col-10 col-md-8 col-lg-6">
-    <h1 class="text-center login">Login</h1>
-    <form class="card d-flex flex-column align-items-center table-responsive" #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
-
-      <fieldset class="email-div col-6">
-        <label for="email" class="mb-1 mt-2">Email: </label>
+    <form class="card col-7 d-flex container-fluid flex-column align-items-center table-responsive" #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
+      <h1 class="text-center login mt-4">Login</h1>
+      <fieldset class="email-div col-9">
+        <label for="email" class="mb-1 mt-2">Email </label>
         <input name="email" class="d-block form-control mb-3" id="email" type="email" placeholder="id=" required [(ngModel)]="login.email" >
       </fieldset>
-      <fieldset class="pass-div col-6">
-        <label for="pass" class="mb-1">Password: </label>
-        <input name="pass" id="pass" class="d-block form-control mb-4" type="password" required [(ngModel)]="login.pass">
+      <fieldset class="pass-div col-9">
+        <label for="pass" class="mb-1">Password </label>
+        <input name="pass" id="pass" class="d-block form-control mb-2" type="password" required [(ngModel)]="login.pass">
       </fieldset>
-      <fieldset>
-        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+      <fieldset class="form-check col-9 mb-3">
+        <input class="form-check-input" type="checkbox" id="remember">
+        <label class="form-check-label" for="remember"> Remember me</label>
+      </fieldset>
+      <fieldset class="mb-5 mx-auto col-8 mt-3">
+        <button type="submit" class="btn btn-primary col-12">Submit</button>
       </fieldset>
 
-      <div class="register">
+      <div class="register mb-4 mt-2">
         Don't have an account?
         <a routerLink="/register">Sign up</a>
       </div>

@@ -1,37 +1,13 @@
-ul {
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  /*gap: 3vw;*/
-  padding: 0;
-  margin: 0;
+/*.main-img {*/
+/*  background-image: url('https://a.ppy.sh/12025261?1673568592.jpeg');*/
+/*}*/
+
+.dropdown-center-stuff {
+  right: auto;
+  left: 30%;
+  -webkit-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  min-width: 1rem;
 }
 
-li {
-  background-color: green;
-  padding: 0.5em;
-  margin: 0 0.4em 0 0;
-}
-
-a {
-  text-decoration: none;
-}
-
-.main-nav {
-  background-color: aqua;
-}
-
-.profile {
-  display: list-item;
-  align-self: flex-end;
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.login-register {
-  display: list-item;
-  align-self: flex-end;
-  margin-left: auto;
-  margin-right: 0;
-}
