@@ -18,8 +18,7 @@ export class RegisterComponent {
 
   constructor(private registerService: RegisterService) {
   }
-  registerUser(registerForm : NgForm) : void {
-    console.log(registerForm);
+  registerUser() : void {
     this.registerService.addUser(this.user).subscribe();
   }
 

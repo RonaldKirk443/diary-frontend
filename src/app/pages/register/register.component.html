@@ -1,23 +1,39 @@
-<form class="main-form" #registerForm="ngForm" (ngSubmit)="registerUser(registerForm)">
+<form class="main-form" #registerForm="ngForm" (ngSubmit)="registerUser()">
 
   <div class="email-div">
     <label>Email: </label>
-    <input name="email" required [(ngModel)]="user.email">
+    <input name="email" required [(ngModel)]="user.email" #email="ngModel">
+    <div [hidden]="email.valid || email.pristine"
+         class="alert alert-danger">
+      Email can't be empty
+    </div>
   </div>
   <div class="pass-div">
     <label>Password: </label>
-    <input name="pass" ngModel>
+    <input name="pass" required ngModel #pass="ngModel">
+    <div [hidden]="pass.valid || pass.pristine"
+         class="alert alert-danger">
+      Password can't be empty
+    </div>
   </div>
   <div class="username-div">
     <label>Username: </label>
-    <input name="username" [(ngModel)]="user.username">
+    <input name="username" required [(ngModel)]="user.username" #username="ngModel">
+    <div [hidden]="username.valid || username.pristine"
+         class="alert alert-danger">
+      Username can't be empty
+    </div>
   </div>
   <div class="birthday-div">
     <label>Birthday: </label>
-    <input name="birthday" value="2010-3-25" [(ngModel)]="user.birthday">
+    <input name="birthday" value="2010-3-25" required [(ngModel)]="user.birthday" #birthday="ngModel">
+    <div [hidden]="birthday.valid || birthday.pristine"
+         class="alert alert-danger">
+      Username can't be empty
+    </div>
   </div>
   <div>
-    <button type="submit">Submit</button>
+    <button [disabled]="!registerForm.form.valid" type="submit">Submit</button>
   </div>
   <div></div>
   <div class="login">
