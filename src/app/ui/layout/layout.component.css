@@ -2,16 +2,5 @@
   /*background-color: green;*/
   max-width: 90vw;
   margin: 0 auto;
-
-}
-
-.app-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  text-align: center;
-  background-color: red;
-  margin: 0;
-  padding: 0;
 }
 
