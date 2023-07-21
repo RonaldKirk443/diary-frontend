@@ -1,21 +1,27 @@
-<form class="main-form" #loginForm="ngForm" (ngSubmit)="loginUser()">
-  <div class="email-div">
-    <label>Email: </label>
-    <input name="email" placeholder="id=" required [(ngModel)]="login.email" >
+<div class="idBody row w-100 m-0 mt-5 h-100 container-fluid">
+  <div class="mx-auto col-10 col-md-8 col-lg-6">
+    <form class="card bg-light col-7 d-flex container-fluid flex-column align-items-center table-responsive" #loginForm="ngForm" (ngSubmit)="loginUser()">
+      <h1 class="card-header border-0 text-center login mt-4">Login</h1>
+      <fieldset class="email-div col-9">
+        <label for="email" class="mb-1 mt-2">Email </label>
+        <input name="email" class="d-block form-control mb-3" id="email" type="email" placeholder="id=" required [(ngModel)]="login.email" >
+      </fieldset>
+      <fieldset class="pass-div col-9">
+        <label for="pass" class="mb-1">Password </label>
+        <input name="pass" id="pass" class="d-block form-control mb-2" type="password" required [(ngModel)]="login.pass">
+      </fieldset>
+      <fieldset class="form-check col-9 mb-3">
+        <input class="form-check-input" type="checkbox" id="remember">
+        <label class="form-check-label" for="remember"> Remember me</label>
+      </fieldset>
+      <fieldset class="mb-5 mx-auto col-8 mt-3">
+        <button type="submit" class="btn btn-primary col-12">Submit</button>
+      </fieldset>
+
+      <div class="register mb-4 mt-2">
+        Don't have an account?
+        <a routerLink="/register">Sign up</a>
+      </div>
+    </form>
   </div>
-  <div class="pass-div">
-    <label>Password: </label>
-    <input name="pass" required [(ngModel)]="login.pass">
-  </div>
-  <div>
-    <button type="submit">Submit</button>
-  </div>
-  <div></div>
-  <div class="register">
-    Don't have an account?
-    <a routerLink="/register">Sign up</a>
-  </div>
-  <div>
-    {{ loginForm.value | json}}
-  </div>
-</form>
+</div>
