@@ -7,6 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from "../app-routing.module";
 import {FormsModule} from "@angular/forms";
+import { SettingsComponent } from './settings/settings.component';
 
 
 
@@ -16,7 +17,8 @@ import {FormsModule} from "@angular/forms";
     CollectionsComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    SettingsComponent
   ],
     imports: [
         CommonModule,

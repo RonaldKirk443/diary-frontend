@@ -9,15 +9,13 @@ import {AuthService} from "../../auth/services/auth.service";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit{
-  user: User = {
-    id: 0
-  }
+  user: User = new User();
   constructor(private profileService: ProfileService, private authService : AuthService) {
   }
 
   ngOnInit() {
     this.authService.getUser()?.subscribe(result => {
-      this.user = result
+      this.user = new User(result);
     });
   }
 
