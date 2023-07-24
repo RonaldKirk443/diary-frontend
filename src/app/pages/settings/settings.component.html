@@ -49,6 +49,15 @@
   </div>
 </form>
 
+<form>
+  <div class="hiddenStatus-div">
+    <h4>Profile visibility: </h4>
+    <select name="hiddenStatus" [(ngModel)]="newUser.hiddenStatus" #hiddenStatus="ngModel" (ngModelChange)="updateHiddenStatus()">
+      <option [selected]="option == newUser.hiddenStatus?.toString()" *ngFor="let option of hiddenOptions" [ngValue]="option">{{option}}</option>
+    </select>
+  </div>
+</form>
+
 <ng-template #cancelTemplate>
   <button type="submit">Apply</button>
   <button (click)="cancelEditing()">Cancel</button>

@@ -14,6 +14,7 @@ export class SettingsComponent {
   newUser: User = new User();
 
   edit : String = 'none';
+  hiddenOptions: String[] = ['Private', 'Public'];
 
   constructor(private authService: AuthService, private settingsService: SettingsService) { }
 
@@ -50,6 +51,10 @@ export class SettingsComponent {
     this.updateUser();
   }
 
+  updateHiddenStatus() {
+    this.updateUser();
+  }
+
   updateUser() {
     this.settingsService.updateUser(this.newUser).subscribe(result => {
       this.oldUser = new User(result);
@@ -57,5 +62,4 @@ export class SettingsComponent {
     });
     this.edit = 'none';
   }
-
 }
