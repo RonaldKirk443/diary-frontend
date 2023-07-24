@@ -2,3 +2,10 @@
 body {
   margin: 0;
 }
+
+
+.my-popover {
+  --bs-popover-border-color: #d9534f;
+  --bs-popover-border-width: 0.1rem;
+}
+
