@@ -8,7 +8,7 @@
         <div class="inner-addon right-addon">
 
           <span [hidden]="email.valid || email.pristine" data-bs-custom-class="my-popover" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Email cannot be empty." class="bi bi-info-circle"></span>
-          <input [ngClass]="email.valid || email.pristine ? 'goodClass' : 'border-2 border-color'" name="email" class="work-input d-block form-control mb-3" id="email" type="email" placeholder="id=" required [(ngModel)]="login.email" #email="ngModel">
+          <input [ngClass]="email.valid || email.pristine ? 'goodClass' : 'border-2 border-color'" name="email" class="d-block form-control mb-3" id="email" type="email" placeholder="id=" required [(ngModel)]="login.email" #email="ngModel">
 
         </div>
 
@@ -30,6 +30,7 @@
         <input class="form-check-input" type="checkbox" id="remember">
         <label class="form-check-label" for="remember"> Remember me</label>
       </fieldset>
+
       <fieldset class="mb-5 mx-auto col-8 mt-3">
         <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary col-12">Submit</button>
       </fieldset>
