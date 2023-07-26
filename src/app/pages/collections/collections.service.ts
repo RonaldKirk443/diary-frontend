@@ -17,7 +17,6 @@ export class CollectionsService {
   }
 
   updateCollection(collection: Collection) {
-    console.log(collection);
     return this.http.put<Collection>("/api/collection/update", collection);
   }
 }

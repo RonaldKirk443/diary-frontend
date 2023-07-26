@@ -1,0 +1,65 @@
+<form #pfpForm="ngForm" (ngSubmit)="updatePfp()">
+  <div class="pfp-div">
+    <h4>Change profile picture: </h4>
+    <img [src]="oldUser.pfpLink" alt="Boo">
+    <br>
+    <input [disabled]="edit!='pfp'" name="pfpLink" required [(ngModel)]="newUser.pfpLink" #pfpLink="ngModel">
+    <ng-container *ngIf="edit!='pfp' else cancelTemplate">
+      <button (click)="editMode('pfp')">Change</button>
+    </ng-container>
+  </div>
+</form>
+
+<form #emailForm="ngForm" (ngSubmit)="updateEmail()">
+  <div class="email-div">
+    <h4>Change email: </h4>
+    <input [disabled]="edit!='email'" name="email" required [(ngModel)]="newUser.email" #email="ngModel">
+    <ng-container *ngIf="edit!='email' else cancelTemplate">
+      <button (click)="editMode('email')">Change</button>
+    </ng-container>
+  </div>
+</form>
+
+<form #usernameForm="ngForm" (ngSubmit)="updateUsername()">
+  <div class="username-div">
+    <h4>Change username: </h4>
+    <input [disabled]="edit!='username'" name="username" required [(ngModel)]="newUser.username" #username="ngModel">
+    <ng-container *ngIf="edit!='username' else cancelTemplate">
+      <button (click)="editMode('username')">Change</button>
+    </ng-container>
+  </div>
+</form>
+
+<form #passwordForm="ngForm" (ngSubmit)="updatePassword()">
+  <div class="pass-div">
+    <h4>Change password: </h4>
+    <fieldset [disabled]="edit!='pass'">
+      <label>Current password:</label>
+      <input name="currentPass" required>
+      <br>
+      <label>New password:</label>
+      <input name="pass" required>
+      <br>
+      <label>Confirm password:</label>
+      <input name="passConfirm" required>
+    </fieldset>
+    <ng-container *ngIf="edit!='pass' else cancelTemplate">
+      <button (click)="editMode('pass')">Change</button>
+    </ng-container>
+  </div>
+</form>
+
+<form>
+  <div class="hiddenStatus-div">
+    <h4>Profile visibility: </h4>
+    <select name="hiddenStatus" [(ngModel)]="newUser.hiddenStatus" #hiddenStatus="ngModel" (ngModelChange)="updateHiddenStatus()">
+      <option [selected]="option == newUser.hiddenStatus?.toString()" *ngFor="let option of hiddenOptions" [ngValue]="option">{{option}}</option>
+    </select>
+  </div>
+</form>
+
+<ng-template #cancelTemplate>
+  <button type="submit">Apply</button>
+  <button (click)="cancelEditing()">Cancel</button>
+</ng-template>
+<!--<h2>Your profile is: {{user.hiddenStatus}}</h2>-->

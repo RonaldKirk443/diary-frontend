@@ -12,9 +12,7 @@ import {NgForm} from "@angular/forms";
 export class CollectionsComponent {
 
   collections: Collection[] = [];
-  editingCollection: Collection = {
-    id : 0
-  }
+  editingCollection: Collection = new Collection();
   edit: number = -1;
 
   constructor(private collectionsService: CollectionsService) {
@@ -32,30 +30,19 @@ export class CollectionsComponent {
 
   enterEditMode(colNum: number, col: Collection) {
     this.edit = colNum;
-    console.log(this.edit)
-    this.editingCollection = {
-      id: col.id,
-      title: col.title,
-      description: col.description,
-      backgroundImgLink: col.backgroundImgLink,
-      hiddenStatus: col.hiddenStatus
-    };
+    this.editingCollection = new Collection(col);
   }
 
   saveEdits() {
     this.collectionsService.updateCollection(this.editingCollection).subscribe();
     this.collections[this.edit] = this.editingCollection;
     this.edit = -1;
-    this.editingCollection = {
-      id : 0
-    }
+    this.editingCollection = new Collection();
   }
 
   cancelEdits() {
     this.edit = -1;
-    this.editingCollection = {
-      id : 0
-    }
+    this.editingCollection = new Collection();
   }
 
   switchHiddenStatus() {
