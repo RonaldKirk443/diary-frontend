@@ -9,7 +9,7 @@
         <label for="username" class="mt-2">Username: </label>
 
         <div class="inner-addon right-addon">
-          <span [hidden]="username.valid || username.pristine" data-bs-custom-class="my-popover" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Username cannot be empty." class="bi bi-info-circle"></span>
+          <span id="usernameErrorIcon" [hidden]="username.valid || username.pristine" class="bi bi-info-circle"></span>
           <input [ngClass]="username.valid || username.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" name="username" id="username" required [(ngModel)]="user.username" #username="ngModel">
         </div>
       </fieldset>
@@ -18,7 +18,7 @@
         <label for="email">Email: </label>
 
         <div class="inner-addon right-addon">
-          <span [hidden]="email.valid || email.pristine" data-bs-custom-class="my-popover" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Email cannot be empty." class="bi bi-info-circle"></span>
+          <span id="emailErrorIcon" [hidden]="email.valid || email.pristine" class="bi bi-info-circle"></span>
           <input [ngClass]="email.valid || email.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="email" name="email" required [(ngModel)]="user.email" #email="ngModel">
         </div>
       </fieldset>
@@ -27,7 +27,7 @@
         <label for="password">Password: </label>
 
         <div class="inner-addon right-addon">
-          <span [hidden]="pass.valid || pass.pristine" data-bs-custom-class="my-popover" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Password cannot be empty." class="bi bi-info-circle"></span>
+          <span id="passErrorIcon" [hidden]="pass.valid || pass.pristine" class="bi bi-info-circle"></span>
           <input [ngClass]="pass.valid || pass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="password" name="pass" required ngModel #pass="ngModel">
         </div>
       </fieldset>
@@ -36,7 +36,7 @@
         <label for="cPass">Confirm Password: </label>
 
         <div class="inner-addon right-addon">
-          <span [hidden]="confirmPass.valid || confirmPass.pristine" data-bs-custom-class="my-popover" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Passwords do not match." class="bi bi-info-circle"></span>
+          <span id="cPassErrorIcon" [hidden]="confirmPass.valid || confirmPass.pristine" class="bi bi-info-circle"></span>
           <input [ngClass]="confirmPass.valid || confirmPass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="cPass" name="confirmPass" required ngModel #confirmPass="ngModel">
         </div>
 
@@ -44,11 +44,11 @@
       </fieldset>
 
       <fieldset class="birthday-div col-9 mb-2">
-        <label for="birthdate">Birthday: </label>
+        <label for="birthday">Birthday: </label>
 
         <div class="inner-addon right-addon">
-          <span [hidden]="birthday.valid || birthday.pristine" data-bs-custom-class="my-popover" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Date not valid." class="bi bi-info-circle"></span>
-          <input [ngClass]="birthday.valid || birthday.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="birthdate" name="birthday" value="2010-3-25" required [(ngModel)]="user.birthday" #birthday="ngModel">
+          <span id="birthdayErrorIcon" [hidden]="birthday.valid || birthday.pristine" data-bs-content="Date not valid." class="bi bi-info-circle"></span>
+          <input [ngClass]="birthday.valid || birthday.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="birthday" name="birthday" value="2010-3-25" required [(ngModel)]="user.birthday" #birthday="ngModel">
         </div>
       </fieldset>
 
@@ -63,4 +63,8 @@
     </form>
 
   </div>
+</div>
+
+<div id="errorPopup" class="errorPopover">
+  {{popupErrorMsg}}
 </div>
