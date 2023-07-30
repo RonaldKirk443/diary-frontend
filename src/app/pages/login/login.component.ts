@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm} from '@angular/forms'
 import {Login} from "../../models/login";
 import {AuthService} from "../../auth/services/auth.service";
-import {createPopper, Instance} from "@popperjs/core";
+import {popupErrorMsg} from "../../ui/services/validation-error-popup.service";
+import {ValidationErrorPopupService} from "../../ui/services/validation-error-popup.service";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,9 +15,10 @@ export class LoginComponent {
     email: "",
     pass: ""
   }
-  popupErrorMsg : String = "You shouldn't be seeing this";
+  popupErrorMsg: popupErrorMsg;
 
-  constructor(private authService : AuthService) {
+  constructor(private authService : AuthService, private validationErrorPopupService: ValidationErrorPopupService) {
+    this.popupErrorMsg = validationErrorPopupService.popupErrorMsg;
   }
 
   ngOnInit() {
@@ -23,61 +26,10 @@ export class LoginComponent {
     const passErrorIcon = document.querySelector<HTMLElement>('#passErrorIcon');
     const popup = document.querySelector<HTMLElement>('#errorPopup');
     if (!emailErrorIcon || !passErrorIcon || !popup) return;
-    this.initErrorPopup(emailErrorIcon, popup, "Email cannot be empty");
-    this.initErrorPopup(passErrorIcon, popup, "Pass cannot be empty");
+    this.validationErrorPopupService.initErrorPopup(emailErrorIcon, popup, "Email cannot be empty");
+    this.validationErrorPopupService.initErrorPopup(passErrorIcon, popup, "Pass cannot be empty");
   }
 
-  initErrorPopup(obj : HTMLElement, popup : HTMLElement, errorMsg : String) {
-    let popperInstance : Instance;
-    const showEvents = ['mouseenter'];
-    const hideEvents = ['mouseleave'];
-
-    popperInstance = createPopper(obj, popup, {
-      placement: 'right'
-    });
-
-    showEvents.forEach((event) => {
-      obj.addEventListener(event, () => {
-        this.popupErrorMsg = errorMsg;
-        showErrorPopup();
-      });
-    });
-    hideEvents.forEach((event) => {
-      obj.addEventListener(event, () => {
-        hide();
-      });
-    });
-
-    function showErrorPopup() {
-      popup.setAttribute('data-show', '');
-
-      popperInstance.setOptions((options) => ({
-        ...options,
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [0, 7],
-            },
-          },
-          { name: 'eventListeners', enabled: true },
-        ],
-      }));
-
-      popperInstance.update();
-    }
-
-    function hide() {
-      popup.removeAttribute('data-show');
-
-      popperInstance.setOptions((options) => ({
-        ...options,
-        modifiers: [
-          { name: 'eventListeners', enabled: false },
-        ],
-      }));
-    }
-  }
 
   loginUser() : void {
     if (this.login.email.startsWith("id=")) {
@@ -86,7 +38,6 @@ export class LoginComponent {
       return;
     }
     this.authService.loginUser(this.login, 5);
-
   }
 
 }
