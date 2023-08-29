@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Config
-/src/proxy.conf.json
+src/proxy.conf.json
