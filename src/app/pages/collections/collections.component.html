@@ -18,7 +18,7 @@
       <button class="edit-btn" (click)="cancelEdits()">Cancel</button>
       <button [disabled]="!editForm.form.valid" class="edit-btn" type="submit">CONFIRM</button>
       <input name="description" [(ngModel)]="editingCollection.description">
-      <button class="privacy-btn" (click)="switchHiddenStatus()" [ngStyle]="{'background-color': editingCollection.hiddenStatus?.toString() == 'Private' || editingCollection.hiddenStatus == 1 ? 'red' : 'green' }"></button>
+      <button type="button" class="privacy-btn" (click)="switchHiddenStatus()" [ngStyle]="{'background-color': editingCollection.hiddenStatus?.toString() == 'Private' || editingCollection.hiddenStatus == 1 ? 'red' : 'green' }"></button>
     </form>
   </ng-template>
 </div>
