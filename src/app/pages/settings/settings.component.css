@@ -5,11 +5,11 @@
 
 
 .c1 {
-   background-color: #E8DECD;
- }
+ background-color: green;
+}
 
 .c2 {
-  background-color: #F8F5F0;
+  background-color: red;
 }
 
 input[type="file"] {
@@ -18,87 +18,4 @@ input[type="file"] {
 
 .button-font-size1 {
   font-family: SansSerif;
-}
-
-.applyOverallPadding {
-  padding-left: 23px;
-  padding-right: 23px;
-}
-
-.cancelOverallPadding {
-  padding-left: 18px;
-  padding-right: 18px;
-}
-
-@media (max-width: 576px) {
-  input {
-    width: 90%;
-    margin-left: 12px;
-  }
-
-  .smallButton {
-    width: 95%;
-    margin-top: 4px;
-  }
-
-  .bigButton {
-    width: 90%;
-    margin-left: 12px;
-  }
-
-  select {
-    width: 90%;
-    margin-left: 12px;
-  }
-
-  .fileButton {
-    width: 100%;
-    padding-left: 4px;
-    padding-right: 4px;
-    margin-left: 0;
-    font-size: 2.5vw;
-    min-width: 25vw;
-  }
-
-  .temp {
-    margin-left: 10px;
-  }
-}
-
-@media (min-width: 576px) and (max-width: 768px) {
-  .smallInput {
-    width: 60%;
-    /*margin-left: 31px;*/
-    margin-left: 16px;
-  }
-
-  .rowButton {
-    margin-left: -25px;
-  }
-
-  .row2Button {
-    margin-left: -1px;
-  }
-
-  .lessApplyPadding {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-
-  .lessCancelPadding {
-    padding-left: 13px;
-    padding-right: 13px;
-  }
-
-  .temp {
-    margin-left: 55px;
-  }
-
-  .fileButton {
-    font-size: 2vw;
-    min-width: 15vw;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1800px) {
 }
