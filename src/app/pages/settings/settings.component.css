@@ -5,11 +5,11 @@
 
 
 .c1 {
- background-color: green;
+  background-color: #E8DECD;
 }
 
 .c2 {
-  background-color: red;
+  background-color: #F8F5F0;
 }
 
 input[type="file"] {
@@ -19,3 +19,172 @@ input[type="file"] {
 .button-font-size1 {
   font-family: SansSerif;
 }
+
+.applyOverallPadding {
+  padding-left: 23px;
+  padding-right: 23px;
+}
+
+.cancelOverallPadding {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+@media (max-width: 576px) {
+  input {
+    width: 90%;
+    margin-left: 12px;
+  }
+
+  .smallButton {
+    width: 95%;
+    margin-top: 4px;
+  }
+
+  .bigButton {
+    width: 90%;
+    margin-left: 12px;
+  }
+
+  select {
+    width: 90%;
+    margin-left: 12px;
+  }
+
+  .fileButton {
+    width: 100%;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-left: 0;
+    font-size: 2.5vw;
+    min-width: 25vw;
+  }
+
+  .temp {
+    margin-left: 10px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .smallInput {
+    width: 60%;
+    margin-left: 16px;
+  }
+
+  .rowButton {
+    margin-left: -25px;
+  }
+
+  .row2Button {
+    margin-left: -1px;
+  }
+
+  .lessApplyPadding {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .lessCancelPadding {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .temp {
+    margin-left: 55px;
+  }
+
+  .fileButton {
+    font-size: 2vw;
+    min-width: 15vw;
+  }
+
+  select {
+     width: 53.5%;
+     margin-left: 1px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  input[type="text"] {
+    margin-left: -25px;
+    width: 55%;
+  }
+
+  select {
+    margin-left: -25px;
+    width: 55%;
+  }
+
+  .bigButton {
+    margin-left: -25px;
+    width: 55%;
+  }
+
+  .fileButton {
+    font-size: 1.5vw;
+    min-width: 12vw;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+  .rowButton {
+    margin-left: -25px;
+  }
+
+  .row2Button {
+    margin-left: -1px;
+  }
+
+  .lessApplyPadding {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
+  .lessCancelPadding {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+}
+
+@media (min-width: 850px) and (max-width: 992px) {
+  .rowButton {
+    margin-left: -15px;
+  }
+
+  .row2Button {
+    margin-left: -1px;
+  }
+
+  .lessApplyPadding {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
+  .lessCancelPadding {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1080px) {
+  .rowButton {
+    margin-left: -5px;
+  }
+
+  .lessApplyPadding {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .lessCancelPadding {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+@media (min-width: 1700px) {
+  .smallerDiv {
+    width: 20%;
+  }
+}
+
