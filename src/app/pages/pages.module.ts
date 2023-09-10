@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from "../app-routing.module";
 import {FormsModule} from "@angular/forms";
 import { SettingsComponent } from './settings/settings.component';
+import { EntriesComponent } from './entries/entries.component';
 
 
 
@@ -18,7 +19,8 @@ import { SettingsComponent } from './settings/settings.component';
     LoginComponent,
     ProfileComponent,
     RegisterComponent,
-    SettingsComponent
+    SettingsComponent,
+    EntriesComponent
   ],
     imports: [
         CommonModule,

@@ -9,6 +9,7 @@ import {RegisterComponent} from "./pages/register/register.component";
 import {authGuard} from "./auth/guards/auth.guard";
 import {userGuard} from "./auth/guards/user.guard";
 import {SettingsComponent} from "./pages/settings/settings.component";
+import {EntriesComponent} from "./pages/entries/entries.component";
 
 const routes: Routes = [
   {
@@ -39,7 +40,13 @@ const routes: Routes = [
     path: 'settings',
     component: SettingsComponent,
     canActivate: [userGuard]
+  },
+  {
+    path: 'entries',
+    component: EntriesComponent,
+    canActivate: [userGuard]
   }
+
 ];
 
 @NgModule({

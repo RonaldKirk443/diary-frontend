@@ -4,13 +4,14 @@ import {HiddenStatus} from "../enums/hiddenStatus";
 export class Collection {
   id: number;
   user?: User;
-  title?: string;
+  title: string;
   description?: string;
   backgroundImgLink?: string;
   hiddenStatus?: HiddenStatus;
 
   constructor(orig?: Collection) {
     this.id = 0;
+    this.title = "Untitled Collection"
     if(orig?.id != null) {
       this.id = orig.id;
       this.user = orig.user;
