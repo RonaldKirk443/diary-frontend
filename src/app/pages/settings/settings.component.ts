@@ -13,8 +13,8 @@ export class SettingsComponent {
   oldUser: User = new User();
   newUser: User = new User();
 
-  edit : String = 'none';
-  hiddenOptions: String[] = ['Private', 'Public'];
+  edit : string = 'none';
+  hiddenOptions: string[] = ['Private', 'Public'];
 
   constructor(private authService: AuthService, private settingsService: SettingsService) { }
 
@@ -25,7 +25,7 @@ export class SettingsComponent {
     });
   }
 
-  editMode(edit: String) {
+  editMode(edit: string) {
     this.newUser = new User(this.oldUser);
     this.edit = edit;
   }
