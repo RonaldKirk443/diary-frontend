@@ -3,6 +3,8 @@ import {EntriesService} from "./entries.service";
 import {Entry} from "../../models/entry";
 import {Collection} from "../../models/collection";
 import {CollectionsService} from "../collections/collections.service";
+import {MatDialog} from "@angular/material/dialog";
+import {EntryComponent} from "./entry/entry.component";
 
 @Component({
   selector: 'app-entries',
@@ -17,7 +19,7 @@ export class EntriesComponent {
   collections: Collection[] = [];
 
 
-  constructor(private entriesService: EntriesService, private  collectionsService: CollectionsService) {
+  constructor(private entriesService: EntriesService, private  collectionsService: CollectionsService, private matDialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -70,10 +72,8 @@ export class EntriesComponent {
 
   customCollectionCompare(o1: Collection, o2: Collection) {
     if(o2 == null) {
-      console.log(this.collections)
       return o1.id == 0;
     }
-    console.log(o1);
     return o1.id === o2.id;
   }
 
@@ -83,5 +83,10 @@ export class EntriesComponent {
       this.getEntries();
     });
 
+  }
+
+  viewEntry(entry: Entry) {
+
+    this.matDialog.open(EntryComponent, {data: entry});
   }
 }
