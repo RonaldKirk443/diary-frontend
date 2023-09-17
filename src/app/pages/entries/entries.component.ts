@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {EntriesService} from "./entries.service";
 import {Entry} from "../../models/entry";
 import {Collection} from "../../models/collection";
 import {CollectionsService} from "../collections/collections.service";
 import {MatDialog} from "@angular/material/dialog";
 import {EntryComponent} from "./entry/entry.component";
+import {HiddenStatus} from "../../enums/hiddenStatus";
 
 @Component({
   selector: 'app-entries',
@@ -24,12 +25,25 @@ export class EntriesComponent {
 
   ngOnInit() {
     this.getEntries();
+    // this.addTestEntry();
     this.getCollections();
+  }
+
+  addTestEntry(){
+    let testEntry: Entry = new Entry();
+    testEntry.id = 10;
+    testEntry.collectionId = 2;
+    testEntry.title = "Local test entry"
+    testEntry.createdDate = new Date();
+    testEntry.editedDate = new Date();
+    testEntry.text = "This is a testing entry";
+    this.entries.push(testEntry);
+    console.log(testEntry);
   }
 
   getEntries() {
     this.entriesService.getEntries().subscribe(result => {
-      this.entries = result
+      this.entries = result;
       for (let entry of this.entries) {
         if (entry.collection == null) {
           entry.collection = new Collection();

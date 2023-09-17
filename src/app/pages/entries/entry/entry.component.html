@@ -1,8 +1,9 @@
-
-<div style="border: black solid 3px; padding: 5px; min-width: 65vw; min-height: 87vh">
-  <h2 class="d-flex justify-content-center">{{entry.title}}</h2>
+<div style="border: black solid 3px; padding: 5px; width: 80vw">
+  <h2 (click)="changeTitle()" class="d-flex justify-content-center">{{entry.title}}</h2>
+  <button (click)="editMode ? save() : edit()" class="d-flex">{{editMode? 'Save' : 'Edit'}}</button>
   <br>
-  <p style="border: black solid 2px; min-height: 70vh">
+  <p *ngIfj="!editMode" style="border: black solid 2px; min-height: 65vh;">
     {{entry.text}}
   </p>
+  <textarea *ngIf="editMode" style="border: black solid 2px; min-width: 171vh; min-height:65vh;" [textContent]="entry.text"></textarea>
 </div>
