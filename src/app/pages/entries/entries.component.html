@@ -1,16 +1,45 @@
-<div *ngFor="let entry of entries let i = index" style="border: #1c1c1a solid; margin-top: 5px">
-  <div >
-    <h3>{{entry.title}}</h3>
-    <h6>Created: {{entry.createdDate | date:"medium"}}</h6>
-    <h6>Edited: {{entry.editedDate | date:"medium"}}</h6>
-    <select name="collection" [compareWith]="customCollectionCompare" [(ngModel)]="entry.collection" #collectionTitle="ngModel" (ngModelChange)="updateCollection(entry, $event)">
-      <option *ngFor="let option of collections" [ngValue]="option">{{option.title}}</option>
-    </select>
-    <select name="hiddenStatus" [(ngModel)]="entry.hiddenStatus" #hiddenStatus="ngModel" (ngModelChange)="updateHiddenStatus(entry)">
-      <option [selected]="option == entry.hiddenStatus?.toString()" *ngFor="let option of hiddenOptions" [ngValue]="option">{{option}}</option>
-    </select>
-    <button (click)="deleteEntry(entry)">DELETE</button>
+<div class="idBody row w-100 m-0 mt-4 h-100 container-fluid">
+
+  <div *ngFor="let entry of entries let i = index" class="card bg-light mt-1 border-3 border-dark mx-auto d-flex flex-column container-fluid table-responsive">
+    <div class="row mt-1">
+      <h3 class="col-3">{{entry.title}}</h3>
+      <div class="col-6"></div>
+<!--      col 4 for down and 5 for up-->
+      <div class="col-3 mt-2 d-flex d-flex justify-content-end">
+        <h6 class="col-6 d-flex justify-content-end smallerH6">Created: {{entry.createdDate | date:"shortDate"}}</h6>
+        <h6 class="col-6 d-flex justify-content-end smallerH6">Edited: {{entry.editedDate | date:"shortDate"}}</h6>
+      </div>
+    </div>
+
+<!--    <div class="w-100 col-12">-->
+<!--      <br>-->
+<!--    </div>-->
+
+    <div class="row mb-1">
+
+      <div class="col-2">
+        <select class="form-select" name="collection" [compareWith]="customCollectionCompare" [(ngModel)]="entry.collection" #collectionTitle="ngModel" (ngModelChange)="updateCollection(entry, $event)">
+          <option *ngFor="let option of collections" [ngValue]="option">{{option.title}}</option>
+        </select>
+      </div>
+
+      <div class="col-8"></div>
+
+<!--      col-2-->
+      <div class="col-2 d-flex justify-content-end">
+        <div class="col-6">
+          <select class="form-select" name="hiddenStatus" [(ngModel)]="entry.hiddenStatus" #hiddenStatus="ngModel" (ngModelChange)="updateHiddenStatus(entry)">
+            <option [selected]="option == entry.hiddenStatus?.toString()" *ngFor="let option of hiddenOptions" [ngValue]="option">{{option}}</option>
+          </select>
+        </div>
+        <button class="col-6 btn btn-primary pb-1 px-1 rounded-1 ms-1 deleteBtn" (click)="deleteEntry(entry)"><i class="bi bi-trash-fill icon-large p-0 m-0"></i></button>
+      </div>
+    </div>
+
   </div>
+
+  <button class="btn btn-primary mt-2">New Entry</button>
+
+
 </div>
-<button>CREATE bitch</button>
 
