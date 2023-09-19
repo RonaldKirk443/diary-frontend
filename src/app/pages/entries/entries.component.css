@@ -3,9 +3,31 @@
 }
 
 .deleteBtn {
-  width: 12%;
+  width: 16%;
 }
 
 .smallerH6 {
   width: 34%;
+}
+
+.btn-circle {
+  width: 63px;
+  height: 63px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 5px;
+  line-height: 1.4;
+}
+
+.large-plus {
+  font-size: 30px;
+}
+
+.div-pullup {
+  margin-top: -75px;
+}
+
+.btn-pullup {
+  margin-bottom: 20px;
+  margin-right: -30px;
 }
