@@ -3,14 +3,14 @@
     <h3>{{entry.title}}</h3>
     <h6>Created: {{entry.createdDate | date:"medium"}}</h6>
     <h6>Edited: {{entry.editedDate | date:"medium"}}</h6>
-    <select name="collection" [compareWith]="customCollectionCompare" [(ngModel)]="entry.collection" #collectionTitle="ngModel" (ngModelChange)="updateCollection(entry, $event)">
+    <select (click)="ignoreClick($event)"  name="collection" [compareWith]="customCollectionCompare" [(ngModel)]="entry.collection" #collectionTitle="ngModel" (ngModelChange)="updateCollection(entry, $event)">
       <option *ngFor="let option of collections" [ngValue]="option">{{option.title}}</option>
     </select>
-    <select name="hiddenStatus" [(ngModel)]="entry.hiddenStatus" #hiddenStatus="ngModel" (ngModelChange)="updateHiddenStatus(entry)">
+    <select (click)="ignoreClick($event)" name="hiddenStatus" [(ngModel)]="entry.hiddenStatus" #hiddenStatus="ngModel" (ngModelChange)="updateHiddenStatus(entry)">
       <option [selected]="option == entry.hiddenStatus?.toString()" *ngFor="let option of hiddenOptions" [ngValue]="option">{{option}}</option>
     </select>
-    <button (click)="deleteEntry(entry)">DELETE</button>
+    <button (click)="deleteEntry(entry); ignoreClick($event)">DELETE</button>
   </div>
 </div>
-<button>CREATE bitch</button>
+<button>CREATE</button>
 

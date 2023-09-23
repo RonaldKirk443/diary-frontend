@@ -1,6 +1,9 @@
-import {Component, Inject} from '@angular/core';
+import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {Entry} from "../../../models/entry";
+import {EntriesService} from "../entries.service";
+import {Collection} from "../../../models/collection";
+import {CollectionsService} from "../../collections/collections.service";
 
 @Component({
   selector: 'app-entry',
@@ -8,29 +11,87 @@ import {Entry} from "../../../models/entry";
   styleUrls: ['./entry.component.css']
 })
 export class EntryComponent {
-
+  @ViewChild('titleInput') titleInput: ElementRef | null;
+  @ViewChild('textInput') textInput: ElementRef | null;
   entry: Entry = new Entry();
   editMode: boolean = false;
+  editTitle: boolean = false;
+  title: string = "";
+  collections: Collection[] = [];
+  hiddenOptions: string[] = ['Private', 'Public'];
 
-  constructor(@Inject(MAT_DIALOG_DATA) entry: Entry) {
+
+  constructor(@Inject(MAT_DIALOG_DATA) entry: Entry, private entriesService: EntriesService, private collectionsService: CollectionsService) {
+    this.textInput = null;
+    this.titleInput = null;
     if (entry != null) {
       this.entry = entry;
+      this.title = entry.title ? entry.title : "Error";
       this.editMode = false;
     }
   }
   ngOnInit() {
-    console.log(this.entry)
+    this.getCollections();
   }
 
-  edit() {
+  getCollections() {
+    this.collectionsService.getCollections().subscribe(result => {
+      this.collections = result;
+
+      let emptyCollection = new Collection();
+      emptyCollection.title = "No Collection";
+      this.collections.push(emptyCollection);
+    });
+
+  }
+
+  customCollectionCompare(o1: Collection, o2: Collection) {
+    if(o2 == null) {
+      return o1.id == 0;
+    }
+    return o1.id === o2.id;
+  }
+
+  updateHiddenStatus(entry: Entry) {
+    this.entriesService.updateEntry(entry).subscribe();
+  }
+
+  updateCollection(entry: Entry, collection: Collection) {
+    entry.collection = collection;
+
+    if(entry.collection){
+      entry.collectionId = entry.collection?.id;
+    } else {
+      entry.collectionId = 0;
+    }
+
+    this.entriesService.updateEntry(entry).subscribe();
+  }
+
+  editText() {
     this.editMode = true;
+    setTimeout(()=>{ // this will make the execution after the above boolean has changed
+      this.textInput?.nativeElement.focus();
+    },0);
   }
 
-  save() {
+  saveText() {
+    this.entriesService.updateEntry(this.entry).subscribe();
     this.editMode = false;
   }
 
-  changeTitle() {
-    console.log("sifosdfsd")
+  editTitleBtn() {
+    this.editTitle=true;
+    setTimeout(()=>{ // this will make the execution after the above boolean has changed
+      this.titleInput?.nativeElement.focus();
+    },0);
   }
+
+  saveTitle() {
+    console.log(this.title)
+    this.entry.title = this.title;
+    this.entriesService.updateEntry(this.entry).subscribe();
+    this.editTitle = false;
+  }
+  
 }

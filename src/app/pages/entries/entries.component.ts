@@ -5,7 +5,6 @@ import {Collection} from "../../models/collection";
 import {CollectionsService} from "../collections/collections.service";
 import {MatDialog} from "@angular/material/dialog";
 import {EntryComponent} from "./entry/entry.component";
-import {HiddenStatus} from "../../enums/hiddenStatus";
 
 @Component({
   selector: 'app-entries',
@@ -16,7 +15,6 @@ export class EntriesComponent {
 
   entries: Entry[] = [];
   hiddenOptions: string[] = ['Private', 'Public'];
-  collectionTitles: string[] = [];
   collections: Collection[] = [];
 
 
@@ -56,14 +54,10 @@ export class EntriesComponent {
   getCollections() {
     this.collectionsService.getCollections().subscribe(result => {
       this.collections = result;
-      for(let col of result) {
-        if (col.title != null) this.collectionTitles.push(col.title);
-      }
 
       let emptyCollection = new Collection();
       emptyCollection.title = "No Collection";
       this.collections.push(emptyCollection);
-      this.collectionTitles.push(emptyCollection.title);
     });
 
   }
@@ -103,4 +97,9 @@ export class EntriesComponent {
 
     this.matDialog.open(EntryComponent, {data: entry});
   }
+
+  ignoreClick(e: Event){
+    e.stopPropagation();
+  }
+
 }
