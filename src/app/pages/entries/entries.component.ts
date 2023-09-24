@@ -94,8 +94,8 @@ export class EntriesComponent {
   }
 
   viewEntry(entry: Entry) {
-
-    this.matDialog.open(EntryComponent, {data: entry});
+    let collections = this.collections;
+    this.matDialog.open(EntryComponent, {data: {entry, collections}});
   }
 
   ignoreClick(e: Event){

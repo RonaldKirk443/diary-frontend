@@ -21,28 +21,17 @@ export class EntryComponent {
   hiddenOptions: string[] = ['Private', 'Public'];
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) entry: Entry, private entriesService: EntriesService, private collectionsService: CollectionsService) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: {entry: Entry, collections: Collection[]}, private entriesService: EntriesService) {
     this.textInput = null;
     this.titleInput = null;
-    if (entry != null) {
-      this.entry = entry;
-      this.title = entry.title ? entry.title : "Error";
+    if (data.entry != null) {
+      this.entry = data.entry;
+      this.title = data.entry.title ? data.entry.title : "Error";
       this.editMode = false;
     }
-  }
-  ngOnInit() {
-    this.getCollections();
-  }
-
-  getCollections() {
-    this.collectionsService.getCollections().subscribe(result => {
-      this.collections = result;
-
-      let emptyCollection = new Collection();
-      emptyCollection.title = "No Collection";
-      this.collections.push(emptyCollection);
-    });
-
+    if (data.collections != null) {
+      this.collections = data.collections;
+    }
   }
 
   customCollectionCompare(o1: Collection, o2: Collection) {
@@ -93,5 +82,5 @@ export class EntryComponent {
     this.entriesService.updateEntry(this.entry).subscribe();
     this.editTitle = false;
   }
-  
+
 }
