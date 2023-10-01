@@ -24,10 +24,10 @@
 }
 
 .div-pullup {
-  margin-bottom: 70px;
+  margin-top: -75px;
 }
 
 .btn-pullup {
   margin-bottom: 20px;
-  margin-right: 200px; /*change this for how right btn is from right side of page*/
+  margin-right: -30px;
 }
