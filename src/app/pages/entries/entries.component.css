@@ -33,6 +33,7 @@
     white-space: nowrap;
   }
 
+
   .deleteBtn {
     width: 18%;
     max-width: 40px;
@@ -42,18 +43,28 @@
     margin-top: 4px;
   }
 
-  .smaller-status {
-    width: 95%;
-    max-width: 200px;
-  }
 }
 
-@media (min-width: 600px) {
-  .smallerH6 {
-    width: 34%;
+@media (min-width: 576px) and (max-width: 768px) {
+  .deleteBtn {
+    width: 18%;
+    max-width: 40px;
+  }
+
+  .top-margin {
+    margin-top: 4px;
   }
 
   .deleteBtn {
-    width: 16%;
+    width: 15%;
   }
+}
+
+@media (min-width: 768px) {
+
+
+  .deleteBtn {
+    width: 15%;
+  }
+
 }
