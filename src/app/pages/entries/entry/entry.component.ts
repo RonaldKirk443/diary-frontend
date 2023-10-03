@@ -83,4 +83,8 @@ export class EntryComponent {
     this.editTitle = false;
   }
 
+  ignoreClick(e: Event){
+    e.stopPropagation();
+  }
+
 }
