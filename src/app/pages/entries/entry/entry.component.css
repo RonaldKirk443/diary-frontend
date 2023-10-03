@@ -10,12 +10,17 @@
   resize: none;
 }
 
-a {
-  clip-path: polygon(100% 100%, 49% 100%, 0 100%, 0 0, 50% 31%, 100% 0);
+.aNotHover {
+  clip-path: polygon(100% 40%, 49% 40%, 0 40%, 0 0, 50% 23%, 100% 0);
+  margin-bottom: -38px;
 }
 
-.aHover {
-
+a:hover {
+  clip-path: polygon(100% 92%, 49% 92%, 0 92%, 0 0, 50% 23%, 100% 0);
+  margin-bottom: -10px;
 }
 
+span {
+  font-size: 14px;
+}
 

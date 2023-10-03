@@ -17,13 +17,11 @@
       <div class="d-flex justify-content-end">
 <!--        <button class="btn btn-primary" (click)="editMode ? saveText() : editText(); ignoreClick($event)">{{editMode? 'Save' : 'Edit'}}</button>-->
 <!--        <button class="btn btn-primary" (click)="editMode ? saveText() : editText(); ignoreClick($event)">{{editMode? 'Save' : 'Edit'}}</button>-->
-        <a href="#" class="p-2 btn btn-primary"><i class="bi bi-pencil"></i></a>
-<!--        <a href="#" class="p-2 btn btn-primary aHover"><i class="bi bi-pencil"></i></a>-->
-
+        <a href="#" class="p-2 py-3 btn btn-primary aNotHover position-relative z-0"><span class="bi bi-pencil p-0 m-0"></span></a>
       </div>
 
-      <textarea readonly *ngIf="!editMode" (dblclick)="editText()" class="border border-2 form-control bg-light border-dark area_h">{{entry.text}}</textarea>
-      <textarea #textInput *ngIf="editMode" class="border border-2 border-dark form-control area_h notrezisable"  [(ngModel)]="entry.text"></textarea>
+      <textarea readonly *ngIf="!editMode" (dblclick)="editText()" class="border border-2 form-control bg-light border-dark area_h position-relative z-1">{{entry.text}}</textarea>
+      <textarea #textInput *ngIf="editMode" class="border border-2 border-dark form-control area_h notrezisable position-relative z-1"  [(ngModel)]="entry.text"></textarea>
     </div>
 
     <div class="card-footer row">
