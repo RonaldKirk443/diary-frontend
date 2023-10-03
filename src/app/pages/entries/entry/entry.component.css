@@ -1,0 +1,21 @@
+.card-w {
+  width: 80vw
+}
+
+.area_h {
+  min-height: 65vh
+}
+
+.notrezisable {
+  resize: none;
+}
+
+a {
+  clip-path: polygon(100% 100%, 49% 100%, 0 100%, 0 0, 50% 31%, 100% 0);
+}
+
+.aHover {
+
+}
+
+
