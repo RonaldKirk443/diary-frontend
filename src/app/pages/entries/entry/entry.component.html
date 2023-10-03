@@ -1,21 +1,35 @@
-<div (click)="editMode ? saveText() : null" style="border: black solid 3px; padding: 5px; width: 80vw">
-  <h2 *ngIf="!editTitle" (dblclick)="editTitleBtn()" class="d-flex justify-content-center">{{entry.title}}</h2>
-  <form *ngIf="editTitle" class="d-flex justify-content-center" #titleForm="ngForm" (focusout)="saveTitle()">
-    <input name="title" #titleInput [(ngModel)]="title">
-  </form>
+<div (click)="editMode ? saveText() : null" class="p-3 border-5 card bg-light card-w d-flex flex-column">
 
-  <h6>Created: {{entry.createdDate | date:"medium"}}</h6>
-  <h6>Edited: {{entry.editedDate | date:"medium"}}</h6>
-  <select name="collection" [compareWith]="customCollectionCompare" [(ngModel)]="entry.collection" #collectionTitle="ngModel" (ngModelChange)="updateCollection(entry, $event)">
-    <option *ngFor="let option of collections" [ngValue]="option">{{option.title}}</option>
-  </select>
-  <select name="hiddenStatus" [(ngModel)]="entry.hiddenStatus" #hiddenStatus="ngModel" (ngModelChange)="updateHiddenStatus(entry)">
-    <option [selected]="option == entry.hiddenStatus?.toString()" *ngFor="let option of hiddenOptions" [ngValue]="option">{{option}}</option>
-  </select>
-  <br><br>
-  <button (click)="editMode ? saveText() : editText(); ignoreClick($event)">{{editMode? 'Save' : 'Edit'}}</button>
-  <p *ngIf="!editMode" (dblclick)="editText()" style="border: black solid 2px; min-height: 65vh;">
-    {{entry.text}}
-  </p>
-  <textarea #textInput *ngIf="editMode" style="border: black solid 2px; min-width: 79vw; min-height:65vh;" [(ngModel)]="entry.text"></textarea>
+    <h2 *ngIf="!editTitle" (dblclick)="editTitleBtn()" class="d-flex justify-content-center card-header">{{entry.title}}</h2>
+    <form *ngIf="editTitle" class="d-flex justify-content-center card-header" #titleForm="ngForm" (focusout)="saveTitle()">
+
+      <input class="form-control bg-light text-center" name="title" #titleInput [(ngModel)]="title">
+    </form>
+
+    <div class="card-body">
+      <select class="form-control" name="collection" [compareWith]="customCollectionCompare" [(ngModel)]="entry.collection" #collectionTitle="ngModel" (ngModelChange)="updateCollection(entry, $event)">
+        <option *ngFor="let option of collections" [ngValue]="option">{{option.title}}</option>
+      </select>
+      <select class="form-control" name="hiddenStatus" [(ngModel)]="entry.hiddenStatus" #hiddenStatus="ngModel" (ngModelChange)="updateHiddenStatus(entry)">
+        <option [selected]="option == entry.hiddenStatus?.toString()" *ngFor="let option of hiddenOptions" [ngValue]="option">{{option}}</option>
+      </select>
+      <br>
+      <div class="d-flex justify-content-end">
+<!--        <button class="btn btn-primary" (click)="editMode ? saveText() : editText(); ignoreClick($event)">{{editMode? 'Save' : 'Edit'}}</button>-->
+<!--        <button class="btn btn-primary" (click)="editMode ? saveText() : editText(); ignoreClick($event)">{{editMode? 'Save' : 'Edit'}}</button>-->
+        <a href="#" class="p-2 btn btn-primary"><i class="bi bi-pencil"></i></a>
+<!--        <a href="#" class="p-2 btn btn-primary aHover"><i class="bi bi-pencil"></i></a>-->
+
+      </div>
+
+      <textarea readonly *ngIf="!editMode" (dblclick)="editText()" class="border border-2 form-control bg-light border-dark area_h">{{entry.text}}</textarea>
+      <textarea #textInput *ngIf="editMode" class="border border-2 border-dark form-control area_h notrezisable"  [(ngModel)]="entry.text"></textarea>
+    </div>
+
+    <div class="card-footer row">
+      <div class="col-3"></div>
+      <h6 class="col-4">Created: {{entry.createdDate | date:"medium"}}</h6>
+      <h6 class="col-4">Edited: {{entry.editedDate | date:"medium"}}</h6>
+    </div>
 </div>
+

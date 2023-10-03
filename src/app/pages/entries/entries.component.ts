@@ -95,7 +95,7 @@ export class EntriesComponent {
 
   viewEntry(entry: Entry) {
     let collections = this.collections;
-    this.matDialog.open(EntryComponent, {data: {entry, collections}});
+    this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
   }
 
   ignoreClick(e: Event){
