@@ -1,6 +1,6 @@
 <div class="idBody w-100 m-0 mt-4 mb-1 h-100 container-fluid">
 
-  <div *ngFor="let entry of entries let i= index" class="card bg-light mt-1 border-3 border-dark mx-auto d-flex flex-column container-fluid table-responsive w-75">
+  <div (click)="viewEntry(entry)" *ngFor="let entry of entries let i= index" class="card bg-light mt-1 border-3 border-dark mx-auto d-flex flex-column container-fluid table-responsive w-75">
     <div class="row mt-1 container-fluid pe-0">
       <h3 class="col-12 col-sm-12 col-lg-4 col-xl-5 col-xxl-5 px-0">{{entry.title}}</h3>
       <div class="col-lg-1 col-xl-2 col-xxl-2"></div>
@@ -13,7 +13,7 @@
     <div class="row mb-1 container-fluid pe-0">
 
       <div class="col-12 col-lg-4 col-xl-4 col-xxl-3 px-0">
-        <select class="form-select" name="collection" [compareWith]="customCollectionCompare" [(ngModel)]="entry.collection" #collectionTitle="ngModel" (ngModelChange)="updateCollection(entry, $event)">
+        <select (click)="ignoreClick($event)" class="form-select" name="collection" [compareWith]="customCollectionCompare" [(ngModel)]="entry.collection" #collectionTitle="ngModel" (ngModelChange)="updateCollection(entry, $event)">
           <option *ngFor="let option of collections" [ngValue]="option">{{option.title}}</option>
         </select>
       </div>
@@ -22,11 +22,11 @@
 
       <div class="col-12 col-lg-5 col-xl-4 col-xxl-3 top-margin container-fluid d-flex justify-content-end px-0">
         <div class="col-lg-4 col-xxl-4"></div>
-        <select class="form-select" name="hiddenStatus" [(ngModel)]="entry.hiddenStatus" #hiddenStatus="ngModel" (ngModelChange)="updateHiddenStatus(entry)">
+        <select (click)="ignoreClick($event)" class="form-select" name="hiddenStatus" [(ngModel)]="entry.hiddenStatus" #hiddenStatus="ngModel" (ngModelChange)="updateHiddenStatus(entry)">
           <option [selected]="option == entry.hiddenStatus?.toString()" *ngFor="let option of hiddenOptions" [ngValue]="option">{{option}}</option>
         </select>
 
-        <button class="col-2 col-lg-6 col-xxl-6 btn btn-primary pb-1 px-1 rounded-1 ms-1 deleteBtn" (click)="deleteEntry(entry)"><i class="bi bi-trash-fill icon-large p-0 m-0"></i></button>
+        <button class="col-2 col-lg-6 col-xxl-6 btn btn-primary pb-1 px-1 rounded-1 ms-1 deleteBtn" (click)="deleteEntry(entry); ignoreClick($event)"><i class="bi bi-trash-fill icon-large p-0 m-0"></i></button>
       </div>
 
 
@@ -38,6 +38,4 @@
     <button class="btn btn-primary btn-circle btn-xl btn-pullup"><i class="bi bi-plus large-plus"></i></button>
   </div>
 
-
 </div>
-
