@@ -100,14 +100,24 @@ export class EntriesComponent {
 
   addEntry() {
     let collections = this.collections;
-    let entry: Entry = new Entry();
-    entry.collectionId = 0;
-    entry.text = "Hi!";
-    this.entriesService.addEntry(entry).subscribe(newEntry => {
-      entry = newEntry;
-      entry.collection = new Collection();
-      this.getEntries();
-      // this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
+    let emptyEntry: Entry = new Entry();
+    emptyEntry.collectionId = 0;
+    emptyEntry.text = "Hi!";
+    this.entriesService.addEntry(emptyEntry).subscribe(newEntry => {
+      emptyEntry = newEntry;
+      emptyEntry.collection = new Collection();
+      this.entriesService.getEntries().subscribe(result => {
+        this.entries = result;
+        for (let entry of this.entries) {
+          if (entry.collection == null) {
+            entry.collection = new Collection();
+            entry.collection.title = "No Collection";
+          }
+          if (entry.id == emptyEntry.id){
+            this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
+          }
+        }
+      });
 
     });
 
