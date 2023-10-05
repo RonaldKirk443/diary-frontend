@@ -98,6 +98,21 @@ export class EntriesComponent {
     this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
   }
 
+  addEntry() {
+    let collections = this.collections;
+    let entry: Entry = new Entry();
+    entry.collectionId = 0;
+    entry.text = "Hi!";
+    this.entriesService.addEntry(entry).subscribe(newEntry => {
+      entry = newEntry;
+      entry.collection = new Collection();
+      this.getEntries();
+      // this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
+
+    });
+
+  }
+
   ignoreClick(e: Event){
     e.stopPropagation();
   }
