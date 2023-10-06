@@ -95,7 +95,32 @@ export class EntriesComponent {
 
   viewEntry(entry: Entry) {
     let collections = this.collections;
-    this.matDialog.open(EntryComponent, {data: {entry, collections}});
+    this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
+  }
+
+  addEntry() {
+    let collections = this.collections;
+    let emptyEntry: Entry = new Entry();
+    emptyEntry.collectionId = 0;
+    emptyEntry.text = "Hi!";
+    this.entriesService.addEntry(emptyEntry).subscribe(newEntry => {
+      emptyEntry = newEntry;
+      emptyEntry.collection = new Collection();
+      this.entriesService.getEntries().subscribe(result => {
+        this.entries = result;
+        for (let entry of this.entries) {
+          if (entry.collection == null) {
+            entry.collection = new Collection();
+            entry.collection.title = "No Collection";
+          }
+          if (entry.id == emptyEntry.id){
+            this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
+          }
+        }
+      });
+
+    });
+
   }
 
   ignoreClick(e: Event){

@@ -20,6 +20,10 @@ export class EntriesService {
     return this.http.put<Entry>("/api/entry/update", entry);
   }
 
+  addEntry(entry: Entry) {
+    return this.http.post<Entry>("/api/entry/add/" + this.authService.getLocalId(), entry);
+  }
+
   deleteEntry(entry: Entry) {
     return this.http.delete("/api/entry/delete/" + entry.id.toString(), { responseType: 'text' })
   }
