@@ -11,8 +11,9 @@
 }
 
 .aNotHover {
-  clip-path: polygon(100% 40%, 49% 40%, 0 40%, 0 0, 50% 23%, 100% 0);
-  margin-bottom: -38px;
+  clip-path: polygon(100% 92%, 49% 92%, 0 92%, 0 50%, 50% 70%, 100% 50%);
+  /*clip-path: polygon(100% 40%, 49% 40%, 0 40%, 0 0, 50% 23%, 100% 0);*/
+  margin-bottom: -10px;
 }
 
 a:hover {
@@ -20,7 +21,16 @@ a:hover {
   margin-bottom: -10px;
 }
 
-span {
-  font-size: 14px;
+.aHovered {
+  clip-path: polygon(100% 92%, 49% 92%, 0 92%, 0 0, 50% 23%, 100% 0);
+  margin-bottom: -10px;
+}
+
+.iconSize1 {
+  font-size: 15px;
+}
+
+.iconSize2 {
+  font-size: 15px;
 }
 
