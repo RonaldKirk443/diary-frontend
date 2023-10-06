@@ -16,6 +16,7 @@ export class EntriesComponent {
   entries: Entry[] = [];
   hiddenOptions: string[] = ['Private', 'Public'];
   collections: Collection[] = [];
+  addingEntry: boolean = false;
 
 
   constructor(private entriesService: EntriesService, private  collectionsService: CollectionsService, private matDialog: MatDialog) {
@@ -95,10 +96,18 @@ export class EntriesComponent {
 
   viewEntry(entry: Entry) {
     let collections = this.collections;
-    this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
+    let dialogRef = this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
+    dialogRef.afterClosed().subscribe(result => {
+      this.entriesService.updateEntry(entry).subscribe();
+      this.addingEntry = false;
+    })
   }
 
   addEntry() {
+    if (this.addingEntry){
+      return;
+    }
+    this.addingEntry = true;
     let collections = this.collections;
     let emptyEntry: Entry = new Entry();
     emptyEntry.collectionId = 0;
@@ -114,12 +123,18 @@ export class EntriesComponent {
             entry.collection.title = "No Collection";
           }
           if (entry.id == emptyEntry.id){
-            this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
+            let dialogRef = this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
+            dialogRef.afterClosed().subscribe(result => {
+              this.entriesService.updateEntry(entry).subscribe();
+              this.addingEntry = false;
+            })
           }
         }
       });
 
     });
+    console.log(this.addingEntry)
+
 
   }
 
