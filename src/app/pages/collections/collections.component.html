@@ -1,11 +1,11 @@
-<div *ngFor="let col of collections let i = index"  [style.background-image]="'url('+col.backgroundImgLink+')'">
+<div *ngFor="let col of collections let i = index">
   <ng-container *ngIf="edit!=i else editTemplate">
     <div class="collection">
-      <h3 class="title">{{col.title}} with id {{col.id}}</h3>
+      <h3 class="title">{{col.title}}</h3>
       <button class="edit-btn" (click)="enterEditMode(i, col)">EDIT</button>
       <p class="description">{{col.description}}</p>
       <button disabled class="privacy-btn" [ngStyle]="{'background-color': col.hiddenStatus?.toString() == 'Private' || col.hiddenStatus == 1 ? 'red' : 'green' }"></button>
-
+      <button (click)="deleteCollection(col)">Delete</button>
     </div>
   </ng-container>
   <ng-template #editTemplate>
@@ -19,6 +19,9 @@
       <button [disabled]="!editForm.form.valid" class="edit-btn" type="submit">CONFIRM</button>
       <input name="description" [(ngModel)]="editingCollection.description">
       <button type="button" class="privacy-btn" (click)="switchHiddenStatus()" [ngStyle]="{'background-color': editingCollection.hiddenStatus?.toString() == 'Private' || editingCollection.hiddenStatus == 1 ? 'red' : 'green' }"></button>
+      <button (click)="deleteCollection(col)">Delete</button>
     </form>
   </ng-template>
 </div>
+
+<button (click)="addCollection()">Add Collection</button>

@@ -24,7 +24,8 @@ export class CollectionsComponent {
 
   getCollections() {
     this.collectionsService.getCollections().subscribe(result => {
-      this.collections = result
+      this.collections = result;
+      this.collections.reverse();
     });
   }
 
@@ -61,4 +62,22 @@ export class CollectionsComponent {
     console.log("POST")
     console.log(this.editingCollection.hiddenStatus);
   }
+
+  addCollection(){
+    let coll: Collection = new Collection();
+    coll.title = "Untitled Collection";
+    this.collectionsService.addCollection(coll).subscribe(newColl => {
+      this.collections.unshift(newColl);
+      this.edit = 0;
+      this.editingCollection = new Collection(this.collections[0]);
+    })
+  }
+
+  deleteCollection(coll: Collection) {
+    this.cancelEdits();
+    this.collectionsService.deleteCollection(coll).subscribe(() => {
+      this.getCollections();
+    })
+  }
+
 }

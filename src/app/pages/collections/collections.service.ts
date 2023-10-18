@@ -8,15 +8,25 @@ import {Collection} from "../../models/collection";
 })
 export class CollectionsService {
 
-  constructor(private authService: AuthService, private http: HttpClient) { }
+  id : number = 0;
+
+  constructor(private authService: AuthService, private http: HttpClient) {
+    this.id = this.authService.getLocalId();
+  }
 
   getCollections() {
-    const id : number = this.authService.getLocalId();
-
-    return this.http.get<Collection[]>("/api/collection/userId/" + id.toString());
+    return this.http.get<Collection[]>("/api/collection/userId/" + this.id.toString());
   }
 
   updateCollection(collection: Collection) {
     return this.http.put<Collection>("/api/collection/update", collection);
+  }
+
+  addCollection(collection: Collection) {
+    return this.http.post<Collection>("/api/collection/add/" + this.id.toString(), collection);
+  }
+
+  deleteCollection(collection: Collection) {
+    return this.http.delete("/api/collection/delete/" + collection.id, { responseType: 'text' });
   }
 }
