@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-dark navbar-expand" data-bs-theme="dark">
   <div class="container-fluid logo-loc">
-    <a class="navbar-brand ps-4"><strong>Diary</strong></a>
+    <a class="navbar-brand ps-4" routerLink="/"><strong>Diary</strong></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -24,7 +24,7 @@
           <ng-template #loggedInTemplate>
             <li class="nav-item dropdown">
               <button class="nav-link main-img py-0 pe-5" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <img class="img-fluid rounded-circle mobile-img-pad" width="40vh" src="https://a.ppy.sh/12025261?1673568592.jpeg">
+                <img class="img-fluid rounded-circle mobile-img-pad" width="40vh" src="{{imageSource}}">
               </button>
               <div class="dropdown-menu dropdown-menu-end mt-1 text-center dropdown-center-stuff p-2 dropdown-mobile-stuff">
                 <a class="dropdown-item " routerLink="/profile">Profile</a>

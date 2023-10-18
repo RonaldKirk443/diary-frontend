@@ -8,10 +8,14 @@ import {AuthService} from "../../auth/services/auth.service";
 })
 export class HeaderComponent implements OnInit{
   loggedIn : boolean = true;
+  imageSource: string = "";
 
   constructor(private authService : AuthService) {
     console.log("Header constructor")
     this.loggedIn = authService.isLoggedIn();
+    if (this.loggedIn) {
+      this.authService.getUser()?.subscribe(user => {if (user.pfpLink) {this.imageSource = user.pfpLink}})
+    }
   }
 
   ngOnInit(): void {
