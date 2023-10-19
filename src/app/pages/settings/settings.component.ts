@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../models/user";
 import {AuthService} from "../../auth/services/auth.service";
-import {SettingsService} from "./settings.service";
 
 @Component({
   selector: 'app-settings',
@@ -16,7 +15,7 @@ export class SettingsComponent {
   edit : string = 'none';
   hiddenOptions: string[] = ['Private', 'Public'];
 
-  constructor(private authService: AuthService, private settingsService: SettingsService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.authService.getUser()?.subscribe(result => {
@@ -56,7 +55,7 @@ export class SettingsComponent {
   }
 
   updateUser() {
-    this.settingsService.updateUser(this.newUser).subscribe(result => {
+    this.authService.updateUser(this.newUser).subscribe(result => {
       this.oldUser = new User(result);
       this.newUser = new User(result);
     });

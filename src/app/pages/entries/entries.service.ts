@@ -8,12 +8,14 @@ import {Entry} from "../../models/entry";
 })
 export class EntriesService {
 
-  constructor(private authService: AuthService, private http: HttpClient) { }
+  id: number = 0;
+
+  constructor(private authService: AuthService, private http: HttpClient) {
+    this.id = this.authService.getLocalId();
+  }
 
   getEntries() {
-    const id : number = this.authService.getLocalId();
-
-    return this.http.get<Entry[]>("/api/entry/userId/" + id.toString());
+    return this.http.get<Entry[]>("/api/entry/userId/" + this.id.toString());
   }
 
   updateEntry(entry: Entry) {

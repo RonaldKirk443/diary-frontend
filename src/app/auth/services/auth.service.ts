@@ -47,4 +47,12 @@ export class AuthService {
     return;
   }
 
+  addUser(user: User) {
+    return this.http.post<User>('/api/user/add', user);
+  }
+
+  updateUser(user: User) {
+    return this.http.put<User>("/api/user/update", user);
+  }
+
 }

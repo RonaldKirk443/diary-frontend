@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm} from '@angular/forms'
-import { RegisterService} from "./register.service";
 import {User} from "../../models/user";
-import {createPopper, Instance} from "@popperjs/core";
 import {popupErrorMsg, ValidationErrorPopupService} from "../../ui/services/validation-error-popup.service";
+import {AuthService} from "../../auth/services/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -14,7 +13,7 @@ export class RegisterComponent {
   popupErrorMsg: popupErrorMsg;
   user: User = new User();
 
-  constructor(private registerService: RegisterService, private validationErrorPopupService: ValidationErrorPopupService) {
+  constructor(private authService: AuthService, private validationErrorPopupService: ValidationErrorPopupService) {
     this.popupErrorMsg = validationErrorPopupService.popupErrorMsg;
   }
 
@@ -37,7 +36,7 @@ export class RegisterComponent {
   }
 
   registerUser() : void {
-    this.registerService.addUser(this.user).subscribe();
+    this.authService.addUser(this.user).subscribe();
   }
 
 }
