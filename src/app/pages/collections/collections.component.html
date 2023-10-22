@@ -1,27 +1,49 @@
-<div *ngFor="let col of collections let i = index">
-  <ng-container *ngIf="edit!=i else editTemplate">
-    <div class="collection">
-      <h3 class="title">{{col.title}}</h3>
-      <button class="edit-btn" (click)="enterEditMode(i, col)">EDIT</button>
-      <p class="description">{{col.description}}</p>
-      <button disabled class="privacy-btn" [ngStyle]="{'background-color': col.hiddenStatus?.toString() == 'Private' || col.hiddenStatus == 1 ? 'red' : 'green' }"></button>
-      <button (click)="deleteCollection(col)">Delete</button>
-    </div>
-  </ng-container>
-  <ng-template #editTemplate>
-    <form class="collection" #editForm="ngForm" (ngSubmit)="saveEdits()">
-      <input name="title" required [(ngModel)]="editingCollection.title" #title="ngModel">
-      <div [hidden]="title.valid || title.pristine"
-           class="alert alert-danger">
-        Title can't be empty
-      </div>
-      <button class="edit-btn" (click)="cancelEdits()">Cancel</button>
-      <button [disabled]="!editForm.form.valid" class="edit-btn" type="submit">CONFIRM</button>
-      <input name="description" [(ngModel)]="editingCollection.description">
-      <button type="button" class="privacy-btn" (click)="switchHiddenStatus()" [ngStyle]="{'background-color': editingCollection.hiddenStatus?.toString() == 'Private' || editingCollection.hiddenStatus == 1 ? 'red' : 'green' }"></button>
-      <button (click)="deleteCollection(col)">Delete</button>
-    </form>
-  </ng-template>
-</div>
+<div class="idBody w-100 m-0 mt-4 mb-1 h-100 container-fluid">
 
-<button (click)="addCollection()">Add Collection</button>
+  <div *ngFor="let col of collections let i = index" class="card bg-light mt-1 px-0 border-3 border-dark mx-auto d-flex flex-column container-fluid table-responsive w-75 z-2">
+    <ng-container *ngIf="edit!=i else editTemplate">
+      <div class="row container-fluid mt-1 pe-0 m-0">
+        <div class="col-12 row mb-1 container-fluid p-0 m-0">
+          <div class="col-12 col-sm-12 col-lg-8 px-0">
+            <h3>{{col.title}}</h3>
+          </div>
+          <div class="col-12 col-lg-4 d-flex justify-content-lg-end container-fluid">
+            <button (click)="deleteCollection(col)" class="col-12 col-lg-1 btn btn-primary rounded-1 deleteBtn"><i class="bi bi-trash-fill icon-large p-0 m-0"></i></button>
+          </div>
+        </div>
+        <p class="col-12 m-0 ps-0">{{col.description}}</p>
+        <div class="col-12 row mb-1 container-fluid p-0 m-0">
+          <button disabled class="col-12 col-sm-12 col-lg-8 px-0" [ngStyle]="{'background-color': col.hiddenStatus?.toString() == 'Private' || col.hiddenStatus == 1 ? 'red' : 'green' }"></button>
+          <div class="col-12 col-lg-4 d-flex justify-content-lg-end container-fluid">
+            <button class="col-12 col-lg-1 btn btn-primary rounded-1 deleteBtn" (click)="enterEditMode(i, col)"><i class="bi bi-pencil icon-large p-0 m-0"></i></button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #editTemplate>
+      <form class="row container-fluid mt-1 pe-0 m-0" #editForm="ngForm" (ngSubmit)="saveEdits()">
+
+        <div class="col-12 col-sm-12 col-lg-8 px-0">
+          <input class="form-control bg-light" name="title" required [(ngModel)]="editingCollection.title" #title="ngModel">
+          <div [hidden]="title.valid || title.pristine"
+               class="alert alert-danger">
+            Title can't be empty
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 d-flex justify-content-lg-end container-fluid">
+          <button (click)="deleteCollection(col)" class="col-12 col-lg-1 btn btn-primary rounded-1 deleteBtn"><i class="bi bi-trash-fill icon-large p-0 m-0"></i></button>
+        </div>
+        <button class="edit-btn" (click)="cancelEdits()">Cancel</button>
+        <button [disabled]="!editForm.form.valid" class="edit-btn" type="submit">CONFIRM</button>
+        <input name="description" [(ngModel)]="editingCollection.description">
+        <button type="button" class="privacy-btn" (click)="switchHiddenStatus()" [ngStyle]="{'background-color': editingCollection.hiddenStatus?.toString() == 'Private' || editingCollection.hiddenStatus == 1 ? 'red' : 'green' }"></button>
+      </form>
+    </ng-template>
+  </div>
+
+
+  <div class="fixed-bottom d-flex justify-content-end z-1">
+    <button (click)="addCollection()" class="btn btn-primary btn-circle btn-pullup"><i class="bi bi-plus large-plus"></i></button>
+  </div>
+
+</div>
