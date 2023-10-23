@@ -62,7 +62,7 @@
   }
 
   .deleteBtn {
-    width: 18%;
+    width: 39%;
     max-width: 40px;
   }
 }
@@ -74,7 +74,7 @@
   }
 
   .deleteBtn {
-    width: 10%;
+    width: 28%;
     max-width: 40px;
   }
 }
@@ -91,9 +91,9 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .deleteBtn {
-    width: 15%;
-    max-width: 60px;
+    width: 18%;
+    max-width: 45px;
   }
 }
