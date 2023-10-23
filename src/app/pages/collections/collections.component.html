@@ -5,38 +5,60 @@
       <div class="row container-fluid mt-1 pe-0 m-0">
         <div class="col-12 row mb-1 container-fluid p-0 m-0">
           <div class="col-12 col-sm-12 col-lg-8 px-0">
-            <h3>{{col.title}}</h3>
+            <input disabled class="h3-like p-0 m-0 elipse-h3-like form-control border-0" value="{{col.title}}">
           </div>
           <div class="col-12 col-lg-4 d-flex justify-content-lg-end container-fluid">
-            <button (click)="deleteCollection(col)" class="col-12 col-lg-1 btn btn-primary rounded-1 deleteBtn"><i class="bi bi-trash-fill icon-large p-0 m-0"></i></button>
+            <button (click)="deleteCollection(col)" class="col-12 col-lg-1 btn btn-primary rounded-1 deleteBtn p-0"><i class="bi bi-trash-fill icon-large p-0 m-0"></i></button>
           </div>
         </div>
-        <p class="col-12 m-0 ps-0">{{col.description}}</p>
+
+        <div class="col-12 m-0 ps-0 mb-1">
+          <p class="col-12 m-0">{{col.description}}</p>
+        </div>
+
         <div class="col-12 row mb-1 container-fluid p-0 m-0">
-          <button disabled class="col-12 col-sm-12 col-lg-8 px-0" [ngStyle]="{'background-color': col.hiddenStatus?.toString() == 'Private' || col.hiddenStatus == 1 ? 'red' : 'green' }"></button>
-          <div class="col-12 col-lg-4 d-flex justify-content-lg-end container-fluid">
-            <button class="col-12 col-lg-1 btn btn-primary rounded-1 deleteBtn" (click)="enterEditMode(i, col)"><i class="bi bi-pencil icon-large p-0 m-0"></i></button>
+          <div class="col-12 col-sm-12 col-lg-6 col-xl-7 col-xxl-8 px-0 d-flex container-fluid">
+            <button disabled class="col-12 col-lg-1 rounded-1 deleteBtn btn d-flex justify-content-center" [ngClass]="col.hiddenStatus?.toString() == 'Private' || col.hiddenStatus == 1 ? 'btn-danger' : 'btn-success'">
+              <i class="bi eye-icon p-0 my-auto" [ngClass]="col.hiddenStatus?.toString() == 'Private' || col.hiddenStatus == 1 ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
+          <div class="col-12 col-lg-6 col-xl-5 col-xxl-4 d-flex justify-content-lg-end container-fluid">
+            <button class="col-12 col-lg-1 btn btn-primary rounded-1 deleteBtn p-0" (click)="enterEditMode(i, col)"><i class="bi bi-pencil icon-large p-0 m-0"></i></button>
           </div>
         </div>
       </div>
     </ng-container>
     <ng-template #editTemplate>
       <form class="row container-fluid mt-1 pe-0 m-0" #editForm="ngForm" (ngSubmit)="saveEdits()">
-
-        <div class="col-12 col-sm-12 col-lg-8 px-0">
-          <input class="form-control bg-light" name="title" required [(ngModel)]="editingCollection.title" #title="ngModel">
-          <div [hidden]="title.valid || title.pristine"
-               class="alert alert-danger">
-            Title can't be empty
+        <div class="col-12 row mb-1 container-fluid p-0 m-0">
+          <div class="col-12 col-sm-12 col-lg-6 col-xl-7 col-xxl-8 px-0">
+            <input class="form-control bg-light h3-like m-0 p-0 border-0" name="title" required [(ngModel)]="editingCollection.title" #title="ngModel">
+            <div [hidden]="title.valid || title.pristine"
+                 class="alert alert-danger">
+              Title can't be empty
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 col-xl-5 col-xxl-4 d-flex justify-content-lg-end container-fluid">
+            <button (click)="deleteCollection(col)" class="col-12 col-lg-1 btn btn-primary rounded-1 deleteBtn"><i class="bi bi-trash-fill icon-large p-0 m-0"></i></button>
           </div>
         </div>
-        <div class="col-12 col-lg-4 d-flex justify-content-lg-end container-fluid">
-          <button (click)="deleteCollection(col)" class="col-12 col-lg-1 btn btn-primary rounded-1 deleteBtn"><i class="bi bi-trash-fill icon-large p-0 m-0"></i></button>
+
+        <div class="col-12 m-0 mb-1 ps-0">
+          <textarea class="col-12 m-0 form-control bg-light" name="description" [(ngModel)]="editingCollection.description"></textarea>
+<!--          <input class="col-12 m-0 form-control bg-light" name="description" [(ngModel)]="editingCollection.description">-->
         </div>
-        <button class="edit-btn" (click)="cancelEdits()">Cancel</button>
-        <button [disabled]="!editForm.form.valid" class="edit-btn" type="submit">CONFIRM</button>
-        <input name="description" [(ngModel)]="editingCollection.description">
-        <button type="button" class="privacy-btn" (click)="switchHiddenStatus()" [ngStyle]="{'background-color': editingCollection.hiddenStatus?.toString() == 'Private' || editingCollection.hiddenStatus == 1 ? 'red' : 'green' }"></button>
+
+        <div class="col-12 row mb-1 container-fluid p-0 m-0">
+          <div class="col-12 col-sm-12 col-lg-6 col-xl-7 col-xxl-8 px-0 d-flex container-fluid">
+            <button type="button" class="col-12 col-lg-1 rounded-1 deleteBtn btn d-flex justify-content-center" (click)="switchHiddenStatus()" [ngClass]="editingCollection.hiddenStatus?.toString() == 'Private' || editingCollection.hiddenStatus == 1 ? 'btn-danger' : 'btn-success'">
+              <i class="bi eye-icon p-0 my-auto" [ngClass]="editingCollection.hiddenStatus?.toString() == 'Private' || editingCollection.hiddenStatus == 1 ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
+          <div class="col-12 col-lg-6 col-xl-5 col-xxl-4 d-flex justify-content-lg-end container-fluid">
+            <button class="col-12 col-lg-1 btn btn-danger rounded-1 deleteBtn d-flex justify-content-center me-1" (click)="cancelEdits()"><i class="bi bi-x-circle cx-icon p-0 my-auto"></i></button>
+            <button [disabled]="!editForm.form.valid" class="col-12 col-lg-1 btn btn-success rounded-1 deleteBtn d-flex justify-content-center" type="submit"><i class="bi bi-check-circle cx-icon p-0 my-auto"></i></button>
+          </div>
+        </div>
       </form>
     </ng-template>
   </div>
