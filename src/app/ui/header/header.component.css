@@ -35,3 +35,13 @@
   }
 }
 
+@media (max-width: 373px) {
+  .dropdown-mobile-stuff {
+    right: auto;
+    left: 52%;
+    -webkit-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    min-width: 1rem;
+  }
+}

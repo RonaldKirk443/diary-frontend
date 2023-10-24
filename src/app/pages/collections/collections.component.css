@@ -14,6 +14,10 @@
   font-size: 30px;
 }
 
+textarea {
+  resize: none;
+}
+
 .btn-circle {
   width: 63px;
   height: 63px;
@@ -43,6 +47,7 @@
 }
 
 
+
 @media (max-width: 576px) {
   .btn-pullup {
     margin-bottom: 80px;
@@ -50,8 +55,22 @@
   }
 
   .deleteBtn {
-    width: 18%;
+    width: 100%;
     max-width: 40px;
+  }
+
+  .hideMSBtn {
+    display: none
+  }
+}
+
+.dropdown-menu {
+  min-width: 1rem !important;
+}
+
+@media (min-width: 576px) {
+  .hideSSBtn {
+    display: none
   }
 }
 
