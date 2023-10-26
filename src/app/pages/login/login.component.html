@@ -5,9 +5,9 @@
       <fieldset class="email-div col-9">
         <label for="email" class="mb-1 mt-2">Email </label>
 
-        <div class="inner-addon right-addon">
+        <div class="position-relative right-addon">
 
-          <span id="emailErrorIcon" [hidden]="email.valid || email.pristine" class="bi bi-info-circle"></span>
+          <span id="emailErrorIcon" [hidden]="email.valid || email.pristine" class="bi bi-info-circle p-2"></span>
           <input [ngClass]="email.valid || email.pristine ? 'goodClass' : 'border-2 border-color'" name="email" class="d-block form-control mb-3" id="email" type="email" placeholder="id=" required [(ngModel)]="login.email" #email="ngModel">
 
         </div>
@@ -17,9 +17,9 @@
       <fieldset class="pass-div col-9">
         <label for="pass" class="mb-1">Password </label>
 
-        <div class="inner-addon right-addon">
+        <div class="position-relative right-addon">
 
-          <span id="passErrorIcon" [hidden]="pass.valid || pass.pristine" class="bi bi-info-circle"></span>
+          <span id="passErrorIcon" [hidden]="pass.valid || pass.pristine" class="bi bi-info-circle p-2"></span>
           <input [ngClass]="pass.valid || pass.pristine ? 'goodClass' : 'border-2 border-color'" name="pass" id="pass" class="d-block form-control mb-2" type="password" required [(ngModel)]="login.pass" #pass="ngModel">
         </div>
 
@@ -35,12 +35,12 @@
 
       <div class="register mb-4 mt-2">
         Don't have an account?
-        <a routerLink="/register">Sign up</a>
+        <a (click)="goToRegister()" href="/register">Sign up</a>
       </div>
     </form>
   </div>
 </div>
 
-<div id="errorPopup" class="errorPopover">
+<div id="errorPopup" class="errorPopover bg-danger text-center rounded-3" style="font-size: 0.9rem">
   {{popupErrorMsg.errorString}}
 </div>

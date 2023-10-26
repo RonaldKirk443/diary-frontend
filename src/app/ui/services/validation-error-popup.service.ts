@@ -11,6 +11,7 @@ export class ValidationErrorPopupService {
   constructor() { }
 
   initErrorPopup(obj : HTMLElement, popup : HTMLElement, errorMsg : String) {
+    console.log(obj.id);
     let popperInstance : Instance;
     const showEvents = ['mouseenter'];
     const hideEvents = ['mouseleave'];
@@ -18,6 +19,7 @@ export class ValidationErrorPopupService {
     popperInstance = createPopper(obj, popup, {
       placement: 'right'
     });
+
 
     showEvents.forEach((event) => {
       obj.addEventListener(event, () => {
@@ -44,6 +46,7 @@ export class ValidationErrorPopupService {
             },
           },
           { name: 'eventListeners', enabled: true },
+          { name: 'flip', options: {fallbackPlacements: ['top-end']} }
         ],
       }));
 
@@ -56,7 +59,7 @@ export class ValidationErrorPopupService {
       popperInstance.setOptions((options) => ({
         ...options,
         modifiers: [
-          { name: 'eventListeners', enabled: false },
+          { name: 'eventListeners', enabled: false }
         ],
       }));
     }

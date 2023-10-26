@@ -4,6 +4,7 @@ import {Login} from "../../models/login";
 import {AuthService} from "../../auth/services/auth.service";
 import {popupErrorMsg} from "../../ui/services/validation-error-popup.service";
 import {ValidationErrorPopupService} from "../../ui/services/validation-error-popup.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent {
   login : Login = new Login();
   popupErrorMsg: popupErrorMsg;
 
-  constructor(private authService : AuthService, private validationErrorPopupService: ValidationErrorPopupService) {
+  constructor(private authService : AuthService, private validationErrorPopupService: ValidationErrorPopupService, private router : Router) {
     this.popupErrorMsg = validationErrorPopupService.popupErrorMsg;
   }
 
@@ -30,6 +31,13 @@ export class LoginComponent {
 
   loginUser() : void {
     this.authService.loginUser(this.login);
+  }
+
+  goToRegister() : void {
+    this.router.navigate(['/login'])
+      .then(() => {
+        window.location.reload();
+      });
   }
 
 }
