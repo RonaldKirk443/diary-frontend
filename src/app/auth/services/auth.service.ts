@@ -19,17 +19,15 @@ export class AuthService {
     console.log("auth construct: " + Date.now());
   }
 
-  loginUser(loginForm: Login) {
-    // ADD LOGIN
+  authLogin(loginForm: Login) {
     let id : number = 0;
-    this.http.get<number>('/api/auth/getId' + '?email=' + loginForm.email + '&pass=' + loginForm.pass).subscribe(userId => {
-      if (userId > 0) {
-        localStorage.setItem('userId', userId.toString());
-        this.router.navigate(["/"]).then(() => {window.location.reload()});
-        return true;
-      }
-      return false;
-    });
+    return this.http.get<number>('/api/auth/getId' + '?email=' + loginForm.email + '&pass=' + loginForm.pass);
+  }
+
+  loginUser(userId: number) {
+    // ADD LOGIN
+    localStorage.setItem('userId', userId.toString());
+    this.router.navigate(["/"]).then(() => {window.location.reload()});
   }
 
   logoutUser() {

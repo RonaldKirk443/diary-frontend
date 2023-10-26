@@ -31,7 +31,22 @@ export class LoginComponent {
 
 
   loginUser() : void {
-    this.authService.loginUser(this.login);
+    this.authService.authLogin(this.login).subscribe({
+      next: (userId: number) => {
+        this.authService.loginUser(userId);
+      },
+      error: (e) => {
+        if (e.error == -1) {
+          //EMAIL
+        }
+        else if (e.error == -2) {
+          //PASS
+        }
+        else {
+          //unhandled exception
+        }
+      }
+    });
   }
 
   goToRegister() : void {
