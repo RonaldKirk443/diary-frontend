@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../models/user";
 import {AuthService} from "../../auth/services/auth.service";
+import {Login} from "../../models/login";
 
 @Component({
   selector: 'app-settings',
@@ -11,11 +12,14 @@ export class SettingsComponent {
 
   oldUser: User = new User();
   newUser: User = new User();
+  login: Login = new Login();
 
   edit : string = 'none';
   hiddenOptions: string[] = ['Private', 'Public'];
+  passConfirm: string = "";
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.authService.getUser()?.subscribe(result => {
@@ -34,6 +38,13 @@ export class SettingsComponent {
     this.edit='none';
   }
 
+  checkSame() {
+    if (this.passConfirm != this.login.pass) {
+      //Error
+    }
+  }
+
+
   updatePfp() {
     this.updateUser();
   }
@@ -47,7 +58,12 @@ export class SettingsComponent {
   }
 
   updatePassword() {
-    this.updateUser();
+    this.authService.updatePassword(this.login).subscribe(result => {
+
+    });
+    this.login = new Login();
+    this.passConfirm = "";
+    this.edit = 'none';
   }
 
   updateHiddenStatus() {

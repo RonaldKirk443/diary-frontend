@@ -3,6 +3,7 @@ import { NgForm} from '@angular/forms'
 import {User} from "../../models/user";
 import {popupErrorMsg, ValidationErrorPopupService} from "../../ui/services/validation-error-popup.service";
 import {AuthService} from "../../auth/services/auth.service";
+import {Login} from "../../models/login";
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,7 @@ import {AuthService} from "../../auth/services/auth.service";
 export class RegisterComponent {
   popupErrorMsg: popupErrorMsg;
   user: User = new User();
+  login: Login = new Login();
 
   constructor(private authService: AuthService, private validationErrorPopupService: ValidationErrorPopupService) {
     this.popupErrorMsg = validationErrorPopupService.popupErrorMsg;
@@ -36,7 +38,13 @@ export class RegisterComponent {
   }
 
   registerUser() : void {
-    this.authService.addUser(this.user).subscribe();
+    this.authService.addUser(this.user).subscribe(user => {
+      this.login.userId = user.id;
+      if(user.email) this.login.email = user.email;
+      this.authService.addLogin(this.login).subscribe( () => {
+        this.authService.loginUser(this.login);
+      })
+    });
   }
 
 }

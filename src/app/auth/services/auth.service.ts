@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {User} from "../../models/user";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Login} from "../../models/login";
 import {Router} from "@angular/router";
 
@@ -19,12 +19,17 @@ export class AuthService {
     console.log("auth construct: " + Date.now());
   }
 
-  loginUser(loginForm: Login, testId:number) {
+  loginUser(loginForm: Login) {
     // ADD LOGIN
     let id : number = 0;
-    // this.http.get<number>('/api/user/add').subscribe(data => id);
-    localStorage.setItem('userId', testId.toString());
-    this.router.navigate(["/"]).then(() => {window.location.reload()});
+    this.http.get<number>('/api/auth/getId' + '?email=' + loginForm.email + '&pass=' + loginForm.pass).subscribe(userId => {
+      if (userId > 0) {
+        localStorage.setItem('userId', userId.toString());
+        this.router.navigate(["/"]).then(() => {window.location.reload()});
+        return true;
+      }
+      return false;
+    });
   }
 
   logoutUser() {
@@ -51,8 +56,17 @@ export class AuthService {
     return this.http.post<User>('/api/user/add', user);
   }
 
+  addLogin(login: Login){
+    return this.http.post<Login>('/api/auth/add', login);
+  }
+
   updateUser(user: User) {
     return this.http.put<User>("/api/user/update", user);
+  }
+
+  updatePassword(login: Login) {
+    login.userId = this.getLocalId();
+    return this.http.put<number>("/api/user/update", login);
   }
 
 }

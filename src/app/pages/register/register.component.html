@@ -28,7 +28,7 @@
 
         <div class="inner-addon right-addon">
           <span id="passErrorIcon" [hidden]="pass.valid || pass.pristine" class="bi bi-info-circle"></span>
-          <input [ngClass]="pass.valid || pass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="password" name="pass" required ngModel #pass="ngModel">
+          <input type="password" [ngClass]="pass.valid || pass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="password" name="pass" required [(ngModel)]="login.pass" #pass="ngModel">
         </div>
       </fieldset>
 
@@ -37,7 +37,7 @@
 
         <div class="inner-addon right-addon">
           <span id="cPassErrorIcon" [hidden]="confirmPass.valid || confirmPass.pristine" class="bi bi-info-circle"></span>
-          <input [ngClass]="confirmPass.valid || confirmPass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="cPass" name="confirmPass" required ngModel #confirmPass="ngModel">
+          <input type="password" [ngClass]="confirmPass.valid || confirmPass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="cPass" name="confirmPass" required ngModel #confirmPass="ngModel">
         </div>
 
 
