@@ -10,6 +10,7 @@ import {authGuard} from "./auth/guards/auth.guard";
 import {userGuard} from "./auth/guards/user.guard";
 import {SettingsComponent} from "./pages/settings/settings.component";
 import {EntriesComponent} from "./pages/entries/entries.component";
+import {AboutComponent} from "./pages/about/about.component";
 
 const routes: Routes = [
   {
@@ -46,8 +47,11 @@ const routes: Routes = [
     path: 'entries',
     component: EntriesComponent,
     canActivate: [userGuard]
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   }
-
 ];
 
 @NgModule({

@@ -10,6 +10,7 @@ import {FormsModule} from "@angular/forms";
 import { SettingsComponent } from './settings/settings.component';
 import { EntriesComponent } from './entries/entries.component';
 import { EntryComponent } from './entries/entry/entry.component';
+import { AboutComponent } from './about/about.component';
 
 
 
@@ -22,7 +23,8 @@ import { EntryComponent } from './entries/entry/entry.component';
     RegisterComponent,
     SettingsComponent,
     EntriesComponent,
-    EntryComponent
+    EntryComponent,
+    AboutComponent
   ],
     imports: [
         CommonModule,
