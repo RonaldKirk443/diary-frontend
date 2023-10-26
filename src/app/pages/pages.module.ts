@@ -11,7 +11,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { EntriesComponent } from './entries/entries.component';
 import { EntryComponent } from './entries/entry/entry.component';
 import { AboutComponent } from './about/about.component';
-
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 @NgModule({
@@ -29,7 +29,9 @@ import { AboutComponent } from './about/about.component';
     imports: [
         CommonModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        MatSnackBarModule
     ]
+
 })
 export class PagesModule { }

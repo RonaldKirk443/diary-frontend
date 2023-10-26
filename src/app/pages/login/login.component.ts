@@ -5,17 +5,18 @@ import {AuthService} from "../../auth/services/auth.service";
 import {popupErrorMsg} from "../../ui/services/validation-error-popup.service";
 import {ValidationErrorPopupService} from "../../ui/services/validation-error-popup.service";
 import {Router} from "@angular/router";
+import {MatSnackBar, MatSnackBarModule, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   login : Login = new Login();
   popupErrorMsg: popupErrorMsg;
 
-  constructor(private authService : AuthService, private validationErrorPopupService: ValidationErrorPopupService, private router : Router) {
+  constructor(private authService : AuthService, private validationErrorPopupService: ValidationErrorPopupService, private router : Router, private _snackBar: MatSnackBar) {
     this.popupErrorMsg = validationErrorPopupService.popupErrorMsg;
   }
 
@@ -40,4 +41,19 @@ export class LoginComponent {
       });
   }
 
+  openSnackBarError(message: string, action: string) : void {
+    this._snackBar.open(message, action, {
+      horizontalPosition: "center",
+      verticalPosition: "bottom",
+      panelClass: ['redbg']
+    });
+  }
+
+  openSnackBarSuccess(message: string, action: string) : void {
+    this._snackBar.open(message, action, {
+      horizontalPosition: "center",
+      verticalPosition: "bottom",
+      panelClass: ['greenbg']
+    });
+  }
 }
