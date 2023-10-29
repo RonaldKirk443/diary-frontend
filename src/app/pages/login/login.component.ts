@@ -16,7 +16,7 @@ export class LoginComponent {
   login : Login = new Login();
   popupErrorMsg: popupErrorMsg;
 
-  constructor(private authService : AuthService, private validationErrorPopupService: ValidationErrorPopupService, private router : Router, private _snackBar: MatSnackBar) {
+  constructor(private authService : AuthService, private validationErrorPopupService: ValidationErrorPopupService, private router : Router, private snackBar: MatSnackBar) {
     this.popupErrorMsg = validationErrorPopupService.popupErrorMsg;
   }
 
@@ -36,15 +36,7 @@ export class LoginComponent {
         this.authService.loginUser(userId);
       },
       error: (e) => {
-        if (e.error == -1) {
-          //EMAIL
-        }
-        else if (e.error == -2) {
-          //PASS
-        }
-        else {
-          //unhandled exception
-        }
+        this.openSnackBarError(e.error.message, "Ok")
       }
     });
   }
@@ -57,7 +49,7 @@ export class LoginComponent {
   }
 
   openSnackBarError(message: string, action: string) : void {
-    this._snackBar.open(message, action, {
+    this.snackBar.open(message, action, {
       horizontalPosition: "center",
       verticalPosition: "bottom",
       panelClass: ['redbg']
@@ -65,7 +57,7 @@ export class LoginComponent {
   }
 
   openSnackBarSuccess(message: string, action: string) : void {
-    this._snackBar.open(message, action, {
+    this.snackBar.open(message, action, {
       horizontalPosition: "center",
       verticalPosition: "bottom",
       panelClass: ['greenbg']

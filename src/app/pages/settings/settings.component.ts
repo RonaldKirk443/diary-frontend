@@ -58,12 +58,18 @@ export class SettingsComponent {
   }
 
   updatePassword() {
-    this.authService.updatePassword(this.login).subscribe(result => {
-
+    this.authService.updatePassword(this.login).subscribe({
+      next: (result) => {
+        this.login = new Login();
+        this.passConfirm = "";
+        this.edit = 'none';
+      },
+      error: (e) => {
+        //snackbar with this:
+        //console.log(e.error.message)
+      }
     });
-    this.login = new Login();
-    this.passConfirm = "";
-    this.edit = 'none';
+
   }
 
   updateHiddenStatus() {

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NgForm} from '@angular/forms'
+import {NgForm, NgModel} from '@angular/forms'
 import {User} from "../../models/user";
 import {popupErrorMsg, ValidationErrorPopupService} from "../../ui/services/validation-error-popup.service";
 import {AuthService} from "../../auth/services/auth.service";
 import {Login} from "../../models/login";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-register',
@@ -15,8 +16,9 @@ export class RegisterComponent {
   popupErrorMsg: popupErrorMsg;
   user: User = new User();
   login: Login = new Login();
+  // cPassForm: NgModel;
 
-  constructor(private authService: AuthService, private validationErrorPopupService: ValidationErrorPopupService, private router: Router) {
+  constructor(private authService: AuthService, private validationErrorPopupService: ValidationErrorPopupService, private router: Router, private snackBar: MatSnackBar) {
     this.popupErrorMsg = validationErrorPopupService.popupErrorMsg;
   }
 
@@ -29,6 +31,8 @@ export class RegisterComponent {
     const birthdayErrorIcon = document.querySelector<HTMLElement>('#birthdayErrorIcon');
     const popup = document.querySelector<HTMLElement>('#errorPopup');
 
+    // this.cPassForm = document.querySelector('#passConfirm');
+
     if (!usernameErrorIcon || !emailErrorIcon || !passErrorIcon || !cPassErrorIcon || !birthdayErrorIcon || !popup) return;
 
     this.validationErrorPopupService.initErrorPopup(usernameErrorIcon, popup, "Username cannot be empty");
@@ -39,27 +43,29 @@ export class RegisterComponent {
   }
 
   registerUser() : void {
-    this.authService.addUser(this.user).subscribe(user => {
-      this.login.userId = user.id;
-      if(user.email) this.login.email = user.email;
-      this.authService.addLogin(this.login).subscribe( () => {
-        this.authService.authLogin(this.login).subscribe({
-          next: (userId: number) => {
-            this.authService.loginUser(userId);
+    this.authService.addUser(this.user).subscribe({
+      next: (user: User) => {
+        this.login.userId = user.id;
+        if(user.email) this.login.email = user.email;
+        this.authService.addLogin(this.login).subscribe( {
+          next: () => {
+            this.authService.authLogin(this.login).subscribe({
+              next: (userId: number) => {
+                this.authService.loginUser(userId);
+                },
+              error: (e) => {
+                this.openSnackBarError(e.error.message, "Ok")
+              }
+            });
           },
           error: (e) => {
-            if (e.error == -1) {
-              //EMAIL
-            }
-            else if (e.error == -2) {
-              //PASS
-            }
-            else {
-              //unhandled exception
-            }
+            this.openSnackBarError(e.error.message, "Ok")
           }
-        });
-      })
+        })
+      },
+      error: (e) => {
+        this.openSnackBarError(e.error.message, "Ok")
+      }
     });
   }
 
@@ -68,6 +74,20 @@ export class RegisterComponent {
       .then(() => {
         window.location.reload();
       });
+  }
+
+  openSnackBarError(message: string, action: string) : void {
+    this.snackBar.open(message, action, {
+      horizontalPosition: "center",
+      verticalPosition: "bottom",
+      panelClass: ['redbg']
+    });
+  }
+
+  checkSame() {
+    // if (this.cPassForm?.value != this.login.pass) {
+      // this.cPassForm?.setCustomValidity("Invalid");
+    // }
   }
 
 }

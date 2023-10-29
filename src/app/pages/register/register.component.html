@@ -37,7 +37,7 @@
 
         <div class="inner-addon right-addon">
           <span id="cPassErrorIcon" [hidden]="confirmPass.valid || confirmPass.pristine" class="bi bi-info-circle p-2"></span>
-          <input type="password" [ngClass]="confirmPass.valid || confirmPass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="cPass" name="confirmPass" required ngModel #confirmPass="ngModel">
+          <input type="password" [ngClass]="confirmPass.valid || confirmPass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="cPass" name="confirmPass" required [ngModel]="confirmPass" #confirmPass="ngModel">
         </div>
 
 
@@ -53,7 +53,7 @@
       </fieldset>
 
       <fieldset class="mb-3 mx-auto col-8 mt-4">
-        <button [disabled]="!registerForm.form.valid" class="btn btn-primary col-12" type="submit">Submit</button>
+        <button [disabled]="!registerForm.form.valid || (confirmPass.value != login.pass)" class="btn btn-primary col-12" type="submit">Submit</button>
       </fieldset>
       <div></div>
       <div class="login mb-3">
