@@ -3,6 +3,14 @@
   font-size: 16px;
 }
 
+.bi {
+  color: red;
+}
+
+.right-addon .bi {
+  right: 0px;
+  left: auto;
+}
 
 .c1 {
   background-color: #E8DECD;

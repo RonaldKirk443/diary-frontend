@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NgForm, NgModel} from '@angular/forms'
+import {FormGroup, NgForm, NgModel} from '@angular/forms'
 import {User} from "../../models/user";
 import {popupErrorMsg, ValidationErrorPopupService} from "../../ui/services/validation-error-popup.service";
 import {AuthService} from "../../auth/services/auth.service";
@@ -39,7 +39,7 @@ export class RegisterComponent {
     this.validationErrorPopupService.initErrorPopup(emailErrorIcon, popup, "Email cannot be empty");
     this.validationErrorPopupService.initErrorPopup(passErrorIcon, popup, "Pass cannot be empty");
     this.validationErrorPopupService.initErrorPopup(cPassErrorIcon, popup, "Passwords do not match");
-    this.validationErrorPopupService.initErrorPopup(birthdayErrorIcon, popup, "Date is invalid")
+    this.validationErrorPopupService.initErrorPopup(birthdayErrorIcon, popup, "Date is invalid");
   }
 
   registerUser() : void {

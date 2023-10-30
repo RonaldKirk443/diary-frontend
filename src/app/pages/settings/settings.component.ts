@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from "../../models/user";
 import {AuthService} from "../../auth/services/auth.service";
 import {Login} from "../../models/login";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-settings',
@@ -18,7 +19,7 @@ export class SettingsComponent {
   hiddenOptions: string[] = ['Private', 'Public'];
   passConfirm: string = "";
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -54,7 +55,18 @@ export class SettingsComponent {
   }
 
   updateUsername() {
-    this.updateUser();
+    this.authService.updateUser(this.newUser).subscribe( {
+      next: (result) => {
+        this.oldUser = new User(result);
+        this.newUser = new User(result);
+        this.edit = 'none';
+        this.openSnackBarSuccess("Username changed", "Ok")
+      },
+      error: (e) => {
+        this.openSnackBarError(e.error.message, "Ok");
+    }
+    });
+
   }
 
   updatePassword() {
@@ -63,10 +75,10 @@ export class SettingsComponent {
         this.login = new Login();
         this.passConfirm = "";
         this.edit = 'none';
+        this.openSnackBarSuccess("Password changed", "Ok")
       },
       error: (e) => {
-        //snackbar with this:
-        //console.log(e.error.message)
+        this.openSnackBarError(e.error.message, "Ok");
       }
     });
 
@@ -82,5 +94,21 @@ export class SettingsComponent {
       this.newUser = new User(result);
     });
     this.edit = 'none';
+  }
+
+  openSnackBarError(message: string, action: string) : void {
+    this.snackBar.open(message, action, {
+      horizontalPosition: "center",
+      verticalPosition: "bottom",
+      panelClass: ['redbg']
+    });
+  }
+
+  openSnackBarSuccess(message: string, action: string) : void {
+    this.snackBar.open(message, action, {
+      horizontalPosition: "center",
+      verticalPosition: "bottom",
+      panelClass: ['greenbg']
+    });
   }
 }
