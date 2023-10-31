@@ -15,7 +15,7 @@
                 <div class="col-10 col-sm-8 col-md-8 col-lg-4 col-xl-3 col-xxl-3 d-flex flex-column justify-content-center temp smallerDiv">
                   <img [src]="oldUser.pfpLink" alt="Boo" class="d-block img-fluid mb-2 rounded">
                   <input type="file" id="inputeFile">
-                  <input class="btn btn-primary button-font-size1 fileButton px-1" type="button" value="Upload image" onclick="document.getElementById('inputeFile').click();" />
+                  <input class="btn btn-primary button-font-size1 fileButton px-1" type="text" value="Upload image" onclick="document.getElementById('inputeFile').click();" />
                 </div>
                 <div class="col-2 col-sm-4 col-md-4 col-lg-8 col-xl-8 col-xxl-10"></div>
               </div>
@@ -114,7 +114,9 @@
                 </div>
                 <div class="row mt-2 position-relative right-addon">
                   <label class="col-12 col-sm-4 col-md-6 col-lg-5 col-xl-4 col-xxl-4 col-form-label">Confirm password:</label>
-                  <span id="cPassErrorIcon" [hidden]="edit !='pass' || (passConfirm.valid && passConfirm.value == login.pass) || passConfirm.untouched" class="bi bi-info-circle p-2 position-absolute text-end"></span>
+
+
+                  <span id="cPassErrorIcon" [hidden]="edit !='pass' || (passConfirm.valid && passConfirm.value == login.pass) || passConfirm.untouched" class="bi bi-info-circle  position-absolute text-end smallIcon"></span>
                   <input id="cPassInput" [ngClass]="edit !='pass' || (passConfirm.valid && passConfirm.value == login.pass) || passConfirm.untouched ? 'goodClass' : 'border-2 border-color'" class="col-12 col-sm-8 col-md-6 col-lg-7 col-xl-8 col-xxl-8" type="text" ngModel name="passConfirm" #passConfirm=ngModel required>
                 </div>
               </div>

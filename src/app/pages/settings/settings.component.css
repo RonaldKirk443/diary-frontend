@@ -10,6 +10,11 @@
 
 .bi {
   color: red;
+  padding: 0.5rem;
+}
+
+.smallIcon {
+  width: 7.5%;
 }
 
 .right-addon .bi {
@@ -93,6 +98,11 @@ input[type="file"] {
   .temp {
     margin-left: 10px;
   }
+
+  .bi {
+    top: 48%;
+    margin-right: 9.5%;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
@@ -174,6 +184,11 @@ input[type="file"] {
     padding-left: 11px;
     padding-right: 11px;
   }
+
+  .bi {
+    padding-left: 0;
+    margin-right: 0.2rem;
+  }
 }
 
 @media (min-width: 850px) and (max-width: 992px) {
@@ -193,6 +208,11 @@ input[type="file"] {
   .lessCancelPadding {
     padding-left: 11px;
     padding-right: 11px;
+  }
+
+  .bi {
+    padding-left: 0;
+    margin-right: 0.2rem;
   }
 }
 
@@ -217,4 +237,14 @@ input[type="file"] {
     width: 20%;
   }
 }
+
+@media (min-width: 577px) and (max-width: 681px) {
+  .bi {
+    padding-top: 1.1rem;
+    padding-bottom: 0.4rem;
+    padding-right: 0.6rem;
+  }
+}
+
+
 
