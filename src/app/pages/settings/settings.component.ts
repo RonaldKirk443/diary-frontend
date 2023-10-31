@@ -3,6 +3,7 @@ import {User} from "../../models/user";
 import {AuthService} from "../../auth/services/auth.service";
 import {Login} from "../../models/login";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {popupErrorMsg, ValidationErrorPopupService} from "../../ui/services/validation-error-popup.service";
 
 @Component({
   selector: 'app-settings',
@@ -17,12 +18,19 @@ export class SettingsComponent {
 
   edit : string = 'none';
   hiddenOptions: string[] = ['Private', 'Public'];
-  passConfirm: string = "";
-
-  constructor(private authService: AuthService, private snackBar: MatSnackBar) {
+  popupErrorMsg: popupErrorMsg;
+  cPassInput: HTMLInputElement | null = null;
+  constructor(private authService: AuthService, private snackBar: MatSnackBar, private validationErrorPopupService: ValidationErrorPopupService) {
+    this.popupErrorMsg = validationErrorPopupService.popupErrorMsg;
   }
 
   ngOnInit() {
+    const cPassErrorIcon = document.querySelector<HTMLElement>('#cPassErrorIcon');
+    this.cPassInput = document.querySelector<HTMLInputElement>('#cPassInput');
+    const popup = document.querySelector<HTMLElement>('#errorPopup');
+    if (!cPassErrorIcon || !popup) return;
+    this.validationErrorPopupService.initErrorPopup(cPassErrorIcon, popup, "Passwords do not match");
+
     this.authService.getUser()?.subscribe(result => {
       this.oldUser = new User(result);
       this.newUser = new User(result);
@@ -36,22 +44,51 @@ export class SettingsComponent {
 
   cancelEditing() {
     this.newUser = new User(this.oldUser);
+    this.login = new Login();
     this.edit='none';
-  }
-
-  checkSame() {
-    if (this.passConfirm != this.login.pass) {
-      //Error
+    if(this.cPassInput){
+      this.cPassInput.value = '';
     }
   }
 
-
   updatePfp() {
-    this.updateUser();
+    this.authService.updateUser(this.newUser).subscribe( {
+      next: (result) => {
+        this.oldUser = new User(result);
+        this.newUser = new User(result);
+        this.edit = 'none';
+        this.openSnackBarSuccess("Profile picture changed", "Ok")
+      },
+      error: (e) => {
+        this.openSnackBarError(e.error.message, "Ok");
+      }
+    });
   }
 
   updateEmail() {
-    this.updateUser();
+    this.authService.updateUser(this.newUser).subscribe( {
+      next: (result) => {
+        if (this.newUser.email != null){
+          this.login.email = this.newUser.email;
+          console.log(this.login);
+          this.authService.updateLogin(this.login).subscribe({
+            next: (resultLogin) => {
+              this.oldUser = new User(result);
+              this.newUser = new User(result);
+              this.login = new Login();
+              this.edit = 'none';
+              this.openSnackBarSuccess("Email changed", "Ok")
+            },
+            error: (e) => {
+              this.openSnackBarError(e.error.message, "Ok");
+            }
+          });
+        }
+      },
+      error: (e) => {
+        this.openSnackBarError(e.error.message, "Ok");
+      }
+    });
   }
 
   updateUsername() {
@@ -70,10 +107,12 @@ export class SettingsComponent {
   }
 
   updatePassword() {
-    this.authService.updatePassword(this.login).subscribe({
+    this.authService.updateLogin(this.login).subscribe({
       next: (result) => {
         this.login = new Login();
-        this.passConfirm = "";
+        if(this.cPassInput){
+          this.cPassInput.value = '';
+        }
         this.edit = 'none';
         this.openSnackBarSuccess("Password changed", "Ok")
       },
@@ -85,15 +124,16 @@ export class SettingsComponent {
   }
 
   updateHiddenStatus() {
-    this.updateUser();
-  }
-
-  updateUser() {
-    this.authService.updateUser(this.newUser).subscribe(result => {
-      this.oldUser = new User(result);
-      this.newUser = new User(result);
+    this.authService.updateUser(this.newUser).subscribe( {
+      next: (result) => {
+        this.oldUser = new User(result);
+        this.newUser = new User(result);
+        this.edit = 'none';
+      },
+      error: (e) => {
+        this.openSnackBarError(e.error.message, "Ok");
+      }
     });
-    this.edit = 'none';
   }
 
   openSnackBarError(message: string, action: string) : void {

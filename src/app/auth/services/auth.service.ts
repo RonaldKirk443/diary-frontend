@@ -62,7 +62,7 @@ export class AuthService {
     return this.http.put<User>("/api/user/update", user);
   }
 
-  updatePassword(login: Login) {
+  updateLogin(login: Login) {
     login.userId = this.getLocalId();
     console.log(login);
     return this.http.put<number>("/api/auth/update", login);
