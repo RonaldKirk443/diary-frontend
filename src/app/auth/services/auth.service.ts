@@ -27,12 +27,12 @@ export class AuthService {
   loginUser(userId: number) {
     // ADD LOGIN
     localStorage.setItem('userId', userId.toString());
-    this.router.navigate(["/"]).then(() => {window.location.reload()});
+    this.router.navigate(["/entries"]).then(() => {window.location.reload()});
   }
 
   logoutUser() {
     localStorage.setItem("userId", "0");
-    this.router.navigate(["/"]).then(() => {window.location.reload()});
+    this.router.navigate(["/entries"]).then(() => {window.location.reload()});
   }
 
   isLoggedIn() : boolean {

@@ -13,17 +13,16 @@ export class HeaderComponent implements OnInit{
   constructor(private authService : AuthService) {
     console.log("Header constructor")
     this.loggedIn = authService.isLoggedIn();
+    this.imageSource = "https://osu.ppy.sh/images/layout/avatar-guest@2x.png";
     if (this.loggedIn) {
       this.authService.getUser()?.subscribe(user => {if (user.pfpLink) {this.imageSource = user.pfpLink}})
     }
   }
 
   ngOnInit(): void {
-    console.log("Header onInit")
   }
 
   logOut() {
-    console.log("LOG OUT");
     this.authService.logoutUser();
   }
 

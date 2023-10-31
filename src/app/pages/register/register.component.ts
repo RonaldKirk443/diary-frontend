@@ -68,7 +68,7 @@ export class RegisterComponent {
   }
 
   registerUser() : void {
-    console.log(this.user);
+    this.user.pfpLink = "https://osu.ppy.sh/images/layout/avatar-guest@2x.png";
     this.authService.addUser(this.user).subscribe({
       next: (user: User) => {
         this.login.userId = user.id;
