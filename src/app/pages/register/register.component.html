@@ -9,8 +9,8 @@
         <label for="username" class="mt-2">Username: </label>
 
         <div class="inner-addon right-addon">
-          <span id="usernameErrorIcon" [hidden]="username.valid || username.pristine" class="bi bi-info-circle p-2"></span>
-          <input [ngClass]="username.valid || username.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" name="username" id="username" required [(ngModel)]="user.username" #username="ngModel">
+          <span id="usernameErrorIcon" [hidden]="username.valid || username.untouched" class="bi bi-info-circle p-2"></span>
+          <input [ngClass]="username.valid || username.untouched ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" name="username" id="username" required [(ngModel)]="user.username" #username="ngModel">
         </div>
       </fieldset>
 
@@ -18,8 +18,8 @@
         <label for="email">Email: </label>
 
         <div class="inner-addon right-addon">
-          <span id="emailErrorIcon" [hidden]="email.valid || email.pristine" class="bi bi-info-circle p-2"></span>
-          <input [ngClass]="email.valid || email.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="email" name="email" required [(ngModel)]="user.email" #email="ngModel">
+          <span id="emailErrorIcon" [hidden]="email.valid || email.untouched" class="bi bi-info-circle p-2"></span>
+          <input [ngClass]="email.valid || email.untouched ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="email" name="email" required [(ngModel)]="user.email" #email="ngModel">
         </div>
       </fieldset>
 
@@ -27,8 +27,8 @@
         <label for="password">Password: </label>
 
         <div class="inner-addon right-addon">
-          <span id="passErrorIcon" [hidden]="pass.valid || pass.pristine" class="bi bi-info-circle p-2"></span>
-          <input type="password"  [ngClass]="pass.valid || pass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="password" name="pass" required [(ngModel)]="login.pass" #pass="ngModel">
+          <span id="passErrorIcon" [hidden]="pass.valid || pass.untouched" class="bi bi-info-circle p-2"></span>
+          <input type="password" [ngClass]="pass.valid || pass.untouched ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="password" name="pass" required [(ngModel)]="login.pass" #pass="ngModel">
         </div>
       </fieldset>
 
@@ -36,8 +36,8 @@
         <label for="cPass">Confirm Password: </label>
 
         <div class="inner-addon right-addon">
-          <span id="cPassErrorIcon" [hidden]="confirmPass.valid || confirmPass.pristine" class="bi bi-info-circle p-2"></span>
-          <input type="password" [ngClass]="confirmPass.valid || confirmPass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="cPass" name="confirmPass" required [ngModel]="confirmPass" #confirmPass="ngModel">
+          <span id="cPassErrorIcon" [hidden]="(confirmPass.valid && confirmPass.value == login.pass) || confirmPass.untouched" class="bi bi-info-circle p-2"></span>
+          <input type="password" [ngClass]="(confirmPass.valid && confirmPass.value == login.pass) || confirmPass.untouched ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="cPass" name="confirmPass" required ngModel #confirmPass="ngModel">
         </div>
 
 

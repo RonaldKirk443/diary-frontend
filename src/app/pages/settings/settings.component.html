@@ -52,7 +52,7 @@
                 </div>
               </div>
               <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-5 ps-4 my-auto">
-                <ng-container *ngIf="edit!='email' else cancelTemplateSmall">
+                <ng-container *ngIf="edit!='email' else cancelTemplateEmail">
                   <button (click)="editMode('email')" class="btn btn-primary px-3 smallButton rowButton">Change</button>
                 </ng-container>
               </div>
@@ -66,7 +66,7 @@
                 </div>
               </div>
               <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-xxl-5 ps-4 my-auto">
-                <ng-container *ngIf="edit!='username' else cancelTemplateSmall">
+                <ng-container *ngIf="edit!='username' else cancelTemplateUsername">
                   <button (click)="editMode('username')" class="btn btn-primary px-3 smallButton rowButton">Change</button>
                 </ng-container>
               </div>
@@ -112,9 +112,10 @@
                   <label class="col-12 col-sm-4 col-md-6 col-lg-5 col-xl-4 col-xxl-4 col-form-label">New password:</label>
                   <input class="col-12 col-sm-8 col-md-6 col-lg-7 col-xl-8 col-xxl-8" type="text" [(ngModel)]="login.pass" name="pass" required>
                 </div>
-                <div class="row mt-2">
+                <div class="row mt-2 position-relative right-addon">
                   <label class="col-12 col-sm-4 col-md-6 col-lg-5 col-xl-4 col-xxl-4 col-form-label">Confirm password:</label>
-                  <input id="passConfirm" class="col-12 col-sm-8 col-md-6 col-lg-7 col-xl-8 col-xxl-8" type="text" [(ngModel)]="passConfirm" name="passConfirm" required>
+                  <span id="cPassErrorIcon" [hidden]="edit !='pass' || (passConfirm.valid && passConfirm.value == login.pass) || passConfirm.untouched" class="bi bi-info-circle p-2 position-absolute text-end"></span>
+                  <input id="cPassInput" [ngClass]="edit !='pass' || (passConfirm.valid && passConfirm.value == login.pass) || passConfirm.untouched ? 'goodClass' : 'border-2 border-color'" class="col-12 col-sm-8 col-md-6 col-lg-7 col-xl-8 col-xxl-8" type="text" ngModel name="passConfirm" #passConfirm=ngModel required>
                 </div>
               </div>
               <div class="col-12 col-sm-3 col-md-4 col-lg-4 col-xl-4 col-xxl-5"></div>
@@ -139,16 +140,23 @@
   </div>
 
 
-  <ng-template #cancelTemplateSmall>
-    <button type="submit" class="btn btn-primary me-1 smallButton rowButton lessApplyPadding applyOverallPadding">Apply</button>
+  <ng-template #cancelTemplateEmail>
+    <button [disabled]="emailForm.invalid" type="submit" class="btn btn-primary me-1 smallButton rowButton lessApplyPadding applyOverallPadding">Apply</button>
+    <button (click)="cancelEditing()" class="btn btn-primary smallButton row2Button lessCancelPadding cancelOverallPadding">Cancel</button>
+  </ng-template>
+  <ng-template #cancelTemplateUsername>
+    <button [disabled]="usernameForm.invalid" type="submit" class="btn btn-primary me-1 smallButton rowButton lessApplyPadding applyOverallPadding">Apply</button>
     <button (click)="cancelEditing()" class="btn btn-primary smallButton row2Button lessCancelPadding cancelOverallPadding">Cancel</button>
   </ng-template>
   <ng-template #cancelTemplateBig>
-    <button type="submit" class="btn btn-primary mb-1 col-12 col-sm-8 col-md-6 col-lg-7 col-xl-8 col-xxl-8 bigButton">Apply</button>
+    <button type="submit" [disabled]="(passConfirm.value != login.pass) || passwordForm.invalid" class="btn btn-primary mb-1 col-12 col-sm-8 col-md-6 col-lg-7 col-xl-8 col-xxl-8 bigButton">Apply</button>
     <div class="col-12 col-sm-4 col-md-6 col-lg-5 col-xl-4"></div>
-    <button (click)="cancelEditing()" class="btn btn-primary col-12 col-sm-8 col-md-6 col-lg-7 col-xl-8 col-xxl-8 bigButton">Cancel</button>
+    <button (click)="cancelEditing(); passConfirm" class="btn btn-primary col-12 col-sm-8 col-md-6 col-lg-7 col-xl-8 col-xxl-8 bigButton">Cancel</button>
   </ng-template>
   <!--<h2>Your profile is: {{user.hiddenStatus}}</h2>-->
 
 </div>
 
+<div id="errorPopup" class="errorPopover bg-danger text-center rounded-3" style="font-size: 0.9rem">
+  {{popupErrorMsg.errorString}}
+</div>

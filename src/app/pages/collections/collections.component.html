@@ -54,7 +54,7 @@
         <div class="col-12 row mb-1 container-fluid p-0 m-0">
           <div class="col-12 col-sm-8 px-0">
             <input class="form-control bg-light h3-like m-0 p-0 border-0" name="title" required [(ngModel)]="editingCollection.title" #title="ngModel">
-            <div [hidden]="title.valid || title.pristine"
+            <div [hidden]="title.valid || title.untouched"
                  class="alert alert-danger">
               Title can't be empty
             </div>
