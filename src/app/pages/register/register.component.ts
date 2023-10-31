@@ -60,13 +60,11 @@ export class RegisterComponent {
 
     // this.cPassForm = document.querySelector('#passConfirm');
 
-    if (!usernameErrorIcon || !emailErrorIcon || !passErrorIcon || !cPassErrorIcon || !birthdayErrorIcon || !popup) return;
-
+    if (!usernameErrorIcon || !emailErrorIcon || !passErrorIcon || !cPassErrorIcon || !popup) return;
     this.validationErrorPopupService.initErrorPopup(usernameErrorIcon, popup, "Username cannot be empty");
     this.validationErrorPopupService.initErrorPopup(emailErrorIcon, popup, "Email cannot be empty");
     this.validationErrorPopupService.initErrorPopup(passErrorIcon, popup, "Pass cannot be empty");
     this.validationErrorPopupService.initErrorPopup(cPassErrorIcon, popup, "Passwords do not match");
-    this.validationErrorPopupService.initErrorPopup(birthdayErrorIcon, popup, "Date is invalid");
   }
 
   registerUser() : void {
