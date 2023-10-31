@@ -28,7 +28,7 @@
 
         <div class="inner-addon right-addon">
           <span id="passErrorIcon" [hidden]="pass.valid || pass.pristine" class="bi bi-info-circle p-2"></span>
-          <input type="password" [ngClass]="pass.valid || pass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="password" name="pass" required [(ngModel)]="login.pass" #pass="ngModel">
+          <input type="password"  [ngClass]="pass.valid || pass.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="password" name="pass" required [(ngModel)]="login.pass" #pass="ngModel">
         </div>
       </fieldset>
 
@@ -47,10 +47,16 @@
         <label for="birthday">Birthday: </label>
 
         <div class="inner-addon right-addon">
-          <span id="birthdayErrorIcon" [hidden]="birthday.valid || birthday.pristine" data-bs-content="Date not valid." class="bi bi-info-circle"></span>
-          <input [ngClass]="birthday.valid || birthday.pristine ? 'goodClass' : 'border-2 border-color'" class="d-block form-control" id="birthday" name="birthday" value="2010-3-25" required [(ngModel)]="user.birthday" #birthday="ngModel">
+          <mat-form-field class="col-12 ">
+            <input matInput [matDatepicker]="picker" [readonly]="true" [formControl]="date" [max]="maxDate"  class="d-block form-control" id="birthday" name="birthday" value="2010-3-25" required [(ngModel)]="user.birthday">
+            <mat-datepicker-toggle class="" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker [touchUi]="!!(isHandset$ | async)" #picker></mat-datepicker>
+          </mat-form-field>
         </div>
       </fieldset>
+
+
+
 
       <fieldset class="mb-3 mx-auto col-8 mt-4">
         <button [disabled]="!registerForm.form.valid || (confirmPass.value != login.pass)" class="btn btn-primary col-12" type="submit">Submit</button>
@@ -64,6 +70,8 @@
 
   </div>
 </div>
+
+
 
 <div id="errorPopup" class="errorPopover bg-danger text-center rounded-3" style="font-size: 0.9rem">
   {{popupErrorMsg.errorString}}
