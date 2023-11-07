@@ -45,3 +45,7 @@
     min-width: 1rem;
   }
 }
+
+.pfp {
+  max-height: 5.7vh;
+}

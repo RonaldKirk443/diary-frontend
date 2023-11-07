@@ -3,7 +3,6 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {Entry} from "../../../models/entry";
 import {EntriesService} from "../entries.service";
 import {Collection} from "../../../models/collection";
-import {CollectionsService} from "../../collections/collections.service";
 
 @Component({
   selector: 'app-entry',

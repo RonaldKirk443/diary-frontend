@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {CollectionsService} from "./collections.service";
 import {Collection} from "../../models/collection";
 import {HiddenStatus} from "../../enums/hiddenStatus";
-import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-collections',

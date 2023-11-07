@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {User} from "../../models/user";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Login} from "../../models/login";
 import {Router} from "@angular/router";
 
@@ -8,8 +8,6 @@ import {Router} from "@angular/router";
   providedIn: 'root'
 })
 export class AuthService {
-
-  localId: number = 0;
 
   user : User = {
     id: 0
@@ -20,7 +18,6 @@ export class AuthService {
   }
 
   authLogin(loginForm: Login) {
-    let id : number = 0;
     return this.http.get<number>('/api/auth/getId' + '?email=' + loginForm.email + '&pass=' + loginForm.pass);
   }
 

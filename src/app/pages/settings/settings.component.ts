@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {User} from "../../models/user";
 import {AuthService} from "../../auth/services/auth.service";
 import {Login} from "../../models/login";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {popupErrorMsg, ValidationErrorPopupService} from "../../ui/services/validation-error-popup.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-settings',
@@ -64,8 +63,8 @@ export class SettingsComponent {
     }
     let reader = new FileReader();
     reader.onload = (e: any) => {
-      let type: string = e.target.result.split(';')[0];
-      let base64: string = e.target.result.split(';')[1];
+      // let type: string = e.target.result.split(';')[0];
+      // let base64: string = e.target.result.split(';')[1];
       console.log(e.target.result);
       this.newUser.pfpLink = e.target.result;
       this.authService.updateUser(this.newUser).subscribe( {

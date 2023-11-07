@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {toNumbers} from "@angular/compiler-cli/src/version_helpers";
 
 @Component({
   selector: 'app-root',

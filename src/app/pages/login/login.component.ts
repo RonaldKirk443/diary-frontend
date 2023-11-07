@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm} from '@angular/forms'
+import { Component} from '@angular/core';
 import {Login} from "../../models/login";
 import {AuthService} from "../../auth/services/auth.service";
 import {popupErrorMsg} from "../../ui/services/validation-error-popup.service";
 import {ValidationErrorPopupService} from "../../ui/services/validation-error-popup.service";
 import {Router} from "@angular/router";
-import {MatSnackBar, MatSnackBarModule, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
@@ -56,11 +55,4 @@ export class LoginComponent {
     });
   }
 
-  openSnackBarSuccess(message: string, action: string) : void {
-    this.snackBar.open(message, action, {
-      horizontalPosition: "center",
-      verticalPosition: "bottom",
-      panelClass: ['greenbg']
-    });
-  }
 }

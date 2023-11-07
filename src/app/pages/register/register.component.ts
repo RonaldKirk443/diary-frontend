@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormGroup, FormControl, NgForm, NgModel} from '@angular/forms'
+import {FormControl} from '@angular/forms'
 import {User} from "../../models/user";
 import {popupErrorMsg, ValidationErrorPopupService} from "../../ui/services/validation-error-popup.service";
 import {AuthService} from "../../auth/services/auth.service";
@@ -9,7 +9,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {map, Observable} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {default as _rollupMoment} from "moment/moment";
-import * as _moment from "moment/moment";
+import _moment from "moment/moment";
 
 
 const moment = _rollupMoment || _moment;
@@ -55,10 +55,8 @@ export class RegisterComponent {
     const emailErrorIcon = document.querySelector<HTMLElement>('#emailErrorIcon');
     const passErrorIcon = document.querySelector<HTMLElement>('#passErrorIcon');
     const cPassErrorIcon = document.querySelector<HTMLElement>('#cPassErrorIcon');
-    const birthdayErrorIcon = document.querySelector<HTMLElement>('#birthdayErrorIcon');
     const popup = document.querySelector<HTMLElement>('#errorPopup');
 
-    // this.cPassForm = document.querySelector('#passConfirm');
 
     if (!usernameErrorIcon || !emailErrorIcon || !passErrorIcon || !cPassErrorIcon || !popup) return;
     this.validationErrorPopupService.initErrorPopup(usernameErrorIcon, popup, "Username cannot be empty");
@@ -108,12 +106,6 @@ export class RegisterComponent {
       verticalPosition: "bottom",
       panelClass: ['redbg']
     });
-  }
-
-  checkSame() {
-    // if (this.cPassForm?.value != this.login.pass) {
-      // this.cPassForm?.setCustomValidity("Invalid");
-    // }
   }
 
 }

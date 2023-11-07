@@ -97,7 +97,7 @@ export class EntriesComponent {
   viewEntry(entry: Entry) {
     let collections = this.collections;
     let dialogRef = this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.entriesService.updateEntry(entry).subscribe();
       this.addingEntry = false;
     })
@@ -124,7 +124,7 @@ export class EntriesComponent {
           }
           if (entry.id == emptyEntry.id){
             let dialogRef = this.matDialog.open(EntryComponent, {data: {entry, collections}, backdropClass: "backdropBackground"});
-            dialogRef.afterClosed().subscribe(result => {
+            dialogRef.afterClosed().subscribe(() => {
               this.entriesService.updateEntry(entry).subscribe();
               this.addingEntry = false;
             })
