@@ -4,7 +4,7 @@ The website is a combination of a diary journal and normal notes. Thus, the name
 
 This was created using the angular framework for the frontend and a springboot backend. 
 
-[Website link](ddotes.github.io)
+[Website link](https://ddotes.github.io)
 ## Run Locally
 
 Clone the project
